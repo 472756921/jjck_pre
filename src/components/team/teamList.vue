@@ -8,7 +8,7 @@
           <span class="limi" style="float:right">220人</span>
           <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
           <br/>
-          <Button type="success" size="small" long>加入</Button>
+          <Button type="success" size="small" long>选择</Button>
         </Card>
         <br/>
         <Card>
@@ -17,7 +17,7 @@
           <span class="limi" style="float:right">220人</span>
           <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
           <br/>
-          <Button type="success" size="small" long>加入</Button>
+          <Button type="success" size="small" long>选择</Button>
         </Card>
       </Col>
     </Row>
@@ -27,6 +27,14 @@
 <script type="text/ecmascript-6">
   export default {
     name: 'TeamList',
+    created() {
+
+    },
+    methods: {
+      getList() {
+
+      },
+    },
   };
 </script>
 

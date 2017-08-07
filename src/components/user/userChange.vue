@@ -1,14 +1,19 @@
 <template>
   <div>
-    <span class="warning"><span class="ttt">姓名</span> 和 <span class="ttt">身份证号码</span> 不可修改，请谨慎填写</span>
-    <br/>
-    <br/>
-    <Input v-model="value1" :maxlength=5>
+    <Input v-model="value1" :maxlength=5 disabled placeholder="姓名">
       <span slot="prepend">姓名<span class="redC"> *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
     </Input>
     <br/>
-    <Input v-model="value2" :maxlength=18>
+    <Input v-model="value2" :maxlength=18 disabled placeholder="身份证号">
     <span slot="prepend">身份证号<span class="redC"> *</span></span>
+    </Input>
+    <br/>
+    <Input v-model="value5" :maxlength=18 disabled placeholder="23">
+    <span slot="prepend">年龄<span class="redC">  *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+    </Input>
+    <br/>
+    <Input v-model="value5" :maxlength=18 disabled placeholder="男">
+    <span slot="prepend">性别<span class="redC">  *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
     </Input>
     <br/>
     <Input v-model="value3" :maxlength=15>
@@ -19,25 +24,16 @@
     <span slot="prepend">联系地址<span class="redC"> *</span></span>
     </Input>
     <br/>
-    <div>
-      <span>团队选择：</span>
-      <Button type="primary" size="small" @click="chooes">选择团队</Button>
-    </div>
-    <br/>
-    <Checkbox v-model="single" class="ttt"><a href="#/agreement">我已阅读并同意《重庆久佳健康协议》</a></Checkbox>
     <br/>
     <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <Button type="success" class="center" >注册</Button>
+    <Button type="success" class="center">修改</Button>
+
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'reg',
+    name: 'userChange',
     data() {
       return {
         value1: '',
@@ -46,11 +42,6 @@
         value4: '',
         single: false,
       };
-    },
-    methods: {
-      chooes() {
-        this.$router.push('teamList');
-      },
     },
   };
 </script>
@@ -61,9 +52,6 @@
   }
   .ttt{
     color: #2d8cf0;
-  }
-  .warning{
-    color: #ff9900;
   }
   .center{
     display: block;
