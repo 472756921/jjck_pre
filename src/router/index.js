@@ -5,6 +5,7 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 import Reg from '@/components/user/reg';
 import Agreement from '@/components/user/agreement';
+import TeamList from '@/components/team/teamList';
 
 Vue.use(Router);
 Vue.use(iView);
@@ -25,6 +26,11 @@ export default new Router({
       path: '/agreement',
       name: 'agreement',
       component: Agreement,
+    },
+    {
+      path: '/teamList',
+      name: 'teamList',
+      component: TeamList,
     },
   ],
 });
