@@ -15,13 +15,18 @@
       4、在用户注册及使用本服务时，陌陌科技需要搜集能识别用户身份的个人信息以便陌陌科技可以在必要时联系用户，或为用户提供更好的使用体验。陌陌科技搜集的信息包括但不限于用户的姓名、性别、年龄、出生日期、身份证号、地址、学校情况、公司情况、所属行业、兴趣爱好、常出没的地方、个人说明；陌陌科技同意对这些信息的使用将受限于第三条用户个人隐私信息保护的约束。
     </p>
     <br/>
-    <Button type="success" class="center">返回</Button>
+    <Button type="success" class="center" @click="back">返回</Button>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
     name: 'agreement',
+    methods: {
+      back() {
+        this.$router.go(-1);
+      },
+    },
   };
 </script>
 

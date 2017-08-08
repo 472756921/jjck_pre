@@ -7,10 +7,30 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { getUserQusetionList } from '../../interface';
+
   export default {
     name: 'userQuestionList',
+    created() {
+      this.getList();
+    },
+    methods: {
+      getList() {
+        this.$ajax({
+          method: 'get',
+          url: getUserQusetionList(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          console.log(res.data);
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+    },
     data() {
       return {
+        userID: '',
         columns1: [
           {
             title: '专家姓名',

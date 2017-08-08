@@ -2,37 +2,64 @@
   <div>
     <Row>
       <Col span="24">
-        <Card>
-          <p slot="title">团队A</p>
-          <span class="limi">建立时间：2017-12-12</span>
-          <span class="limi" style="float:right">220人</span>
-          <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+        <Card v-for="(item, index) in list" style="margin-top: 1rem">
+          <p slot="title">{{item.name}}</p>
+          <span class="limi">建立时间：{{item.createDate}}</span>
+          <span class="limi" style="float:right">{{item.count}}人</span>
+          <p>{{item.introduction}}</p>
           <br/>
-          <Button type="success" size="small" long>选择</Button>
-        </Card>
-        <br/>
-        <Card>
-          <p slot="title">团队B</p>
-          <span class="limi">建立时间：2017-12-12</span>
-          <span class="limi" style="float:right">220人</span>
-          <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
-          <br/>
-          <Button type="success" size="small" long>选择</Button>
+          <Button type="success" long @click="openModel(item)">选择</Button>
         </Card>
       </Col>
     </Row>
+
+    <Modal v-model="modal" width="360">
+      <p slot="header" style="text-align:center">
+        <span>确认加入</span>
+      </p>
+      <div style="text-align:center">
+        <p>加入该团队后将不能加入其它团队。</p>
+        <p>是否继续加入？</p>
+      </div>
+      <div slot="footer">
+        <Button type="success" long @click="getin">加入</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { getTeamList } from '../../interface';
+
   export default {
     name: 'TeamList',
+    data() {
+      return {
+        list: '',
+        modal: false,
+        tempID: '',
+        teamName: '',
+      };
+    },
     created() {
-
+      this.getList();
     },
     methods: {
       getList() {
-
+        this.$http.get(getTeamList()).then((res) => {
+          this.list = res.body;
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      openModel(item) {
+        this.teamID = item.id;
+        this.teamName = item.name;
+        this.modal = true;
+      },
+      getin() {
+        sessionStorage.setItem('UCTID', JSON.stringify({ teamID: this.teamID, teamName: this.teamName }));
+        this.$router.push('reg');
       },
     },
   };
