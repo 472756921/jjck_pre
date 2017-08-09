@@ -39,10 +39,69 @@ export const getUserQusetionList = function () {
   return API;
 };
 
+// 用户提交问题
+export const postUserQusetion = function () {
+  const URL = '/expert/getQuestion';
+  const API = Host + URL;
+  return API;
+};
 
 // 获取专家列表
 export const getExpertList = function () {
   const URL = '/expert/getExpert';
+  const API = Host + URL;
+  return API;
+};
+
+// 预约筛查服务
+export const screening = function () {
+  const URL = '/user/makeANAppointment';
+  const API = Host + URL;
+  return API;
+};
+
+// 预约注射服务
+export const payLast = function () {
+  const URL = '/user/payLast';
+  const API = Host + URL;
+  return API;
+};
+// 预约注射服务申请确认
+export const payLastGO = function () {
+  const URL = '/user/payLastGO';
+  const API = Host + URL;
+  return API;
+};
+// 查看服务状态
+export const getShopType = function () {
+  const URL = '/user/getShopType';
+  const API = Host + URL;
+  return API;
+};
+
+// 购买疫苗
+export const vaccine = function () {
+  const URL = '/user/vaccine';
+  const API = Host + URL;
+  return API;
+};
+// 购买疫苗申请确认
+export const vaccineGO = function () {
+  const URL = '/user/vaccineGO';
+  const API = Host + URL;
+  return API;
+};
+
+// 获取用户筛查结果
+export const getScreeningRes = function () {
+  const URL = '/user/screeningRes';
+  const API = Host + URL;
+  return API;
+};
+
+// 获取用户流程状态
+export const getUserAllStatus = function () {
+  const URL = '/user/getUserAllStatus';
   const API = Host + URL;
   return API;
 };

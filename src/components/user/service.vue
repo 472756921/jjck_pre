@@ -15,17 +15,22 @@
       <br/>
       <br/>
       <br/>
-      <Button type="primary" class="center">预约HPV筛查</Button>
+      <Button type="primary" class="center" @click="service('screening')">预约HPV筛查</Button>
       <br/>
-      <Button type="primary" class="center">处方疫苗就诊安排</Button>
+      <Button type="primary" class="center" @click="service('injection')">处方疫苗就诊安排</Button>
       <br/>
-      <Button type="primary" class="center">疫苗</Button>
+      <Button type="primary" class="center" @click="service('vaccine')">疫苗</Button>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
     name: 'service',
+    methods: {
+      service(type) {
+        this.$router.push({ name: type });
+      },
+    },
   };
 </script>
 

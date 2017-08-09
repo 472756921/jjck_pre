@@ -21,14 +21,76 @@
     <br/>
     <br/>
     <br/>
-    <br/>
-    <Button type="primary" class="center">获取疫苗信息</Button>
+    <Button type="primary" class="center" @click="vaccine" v-if="this.vaccines == null">获取疫苗信息</Button>
+    <Button type="primary" class="center" @click="vaccineGO" v-if="this.vaccines == 1">已付款，申请确认</Button>
+    <Button type="primary" class="center" @click="vaccineGO" v-if="this.vaccines == 2">提醒确认收款</Button>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { vaccine, getShopType, vaccineGO } from '../../interface';
+
   export default {
     name: 'vaccine',
+    data() {
+      return {
+        vaccines: '',
+      };
+    },
+    created() {
+      this.getShopType();
+    },
+    methods: {
+      getShopType() {
+        const par = '?shopID=3';
+        this.$ajax({
+          method: 'get',
+          url: getShopType() + par,
+          dataType: 'JSON',
+        }).then((res) => {
+          this.vaccines = res.data.status;
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      vaccine() {
+        this.$ajax({
+          method: 'get',
+          url: vaccine(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 1) {
+            this.success('预约成功');
+          }
+          if (res.data === 1308) {
+            this.error('您已经预约该服务，请勿重复预约');
+          }
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      vaccineGO() {
+        this.$ajax({
+          method: 'get',
+          url: vaccineGO(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 1) {
+            this.success('已发出申请，系统确认后将通过短信通知');
+          }
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      error(data) {
+        this.$Message.error(data);
+      },
+      success(data) {
+        this.$Message.success(data);
+      },
+    },
   };
 </script>
 

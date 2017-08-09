@@ -4,7 +4,7 @@
     <br/>
     <Row>
       <Col span="24">
-      <Card v-for="(item, index) in list.expertList" style="margin-top: 1rem">
+      <Card v-for="(item, index) in list.expertList" style="margin-bottom: 1rem">
         <p slot="title">{{item.name}}</p>
         <Row>
           <Col span="8">
@@ -16,7 +16,7 @@
           </Col>
         </Row>
         <br/>
-        <Button type="success" size="small" long>提问</Button>
+        <Button type="success" size="small" @click="questionNew(item.id)" long>提问</Button>
       </Card>
       </Col>
     </Row>
@@ -39,6 +39,13 @@
       this.getList();
     },
     methods: {
+      questionNew(d) {
+        if (this.time <= 0) {
+          this.error('对不起，您的咨询次数已经用尽');
+        } else {
+          this.$router.push({ name: 'questionNew', params: { r: 'userNew', docID: d } });
+        }
+      },
       getList() {
         this.$ajax({
           method: 'get',
@@ -48,9 +55,13 @@
         }).then((res) => {
           this.list = res.data;
           this.time = res.data.userQuestionTime;
+          sessionStorage.setItem('userQuestionTime', this.time);
         }).catch((error) => {
           console.log(error);
         });
+      },
+      error(data) {
+        this.$Message.error(data);
       },
     },
   };
@@ -59,6 +70,7 @@
 <style scoped>
   .red {
     color: #ed3f14;
+    font-size: 1.2rem;
   }
   .title{
     color: #2d8cf0;

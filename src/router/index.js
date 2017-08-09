@@ -61,7 +61,7 @@ export default new Router({
     },
     {
       path: '/vaccine',
-      name: 'Vaccine',
+      name: 'vaccine',
       component: Vaccine,
     },
     {

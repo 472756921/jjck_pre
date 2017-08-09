@@ -14,19 +14,45 @@
     <br/>
     <div>
       <h3>特别说明</h3>
-      <p>为了让您更好享受我们的整体服务，此项服务需预付￥1000.00元。
-        <br/>
-        <span class="red">（该项检测不适用于无性检验女性，请谨慎选择）</span>
-      </p>
+      <p>为了让您更好享受我们的整体服务，此项服务需预付￥1000.00元。</p>
+      <p>如果您在购买中遇到任何问题，请联系客服处理哦。</p>
     </div>
     <br/>
-    <Button type="primary" class="center">确认支付检测费用</Button>
+    <Button type="primary" class="center" @click="screening">确认支付检测费用</Button>
+    <div class="red">（该项检测不适用于无性检验女性，请谨慎选择）</div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { screening } from '../../interface';
+
   export default {
     name: 'screening',
+    methods: {
+      screening() {
+        this.$ajax({
+          method: 'get',
+          url: screening(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 1) {
+            this.success('预约成功');
+          }
+          if (res.data === 1308) {
+            this.error('您已经预约该服务，请勿重复预约');
+          }
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      error(data) {
+        this.$Message.error(data);
+      },
+      success(data) {
+        this.$Message.success(data);
+      },
+    },
   };
 </script>
 
@@ -42,5 +68,7 @@
   }
   .red {
     color: #ed3f14;
+    text-align: center;
+    line-height: 2rem;
   }
 </style>
