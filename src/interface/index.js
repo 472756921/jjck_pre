@@ -105,3 +105,10 @@ export const getUserAllStatus = function () {
   const API = Host + URL;
   return API;
 };
+
+// 专家登录
+export const expertLogin = function () {
+  const URL = '/expert/expertLogin';
+  const API = Host + URL;
+  return API;
+};

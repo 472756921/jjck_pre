@@ -1,7 +1,7 @@
 <template>
   <Row>
     <Col :sm="24" :md="{ span: 20, offset: 2 }">
-      <div>刘德华医生，您好！</div>
+      <div>{{doc.name}}，您好！</div>
       <div>
         <span>累计咨询量：<span class="red">2003</span>人/次 ， 累计回复量：<span class="green">2003</span>人/次</span>
         <br/>
@@ -13,7 +13,7 @@
       <Table :columns="columns1" :data="data1"></Table>
       <br/>
       <div class="center">
-        <Page class="center" :current="2" :total="50" simple></Page>
+        <Page class="center" :current="1" :total="22" simple></Page>
       </div>
     </Col>
   </Row>
@@ -22,8 +22,16 @@
 <script type="text/ecmascript-6">
   export default {
     name: 'questionList',
+    created() {
+      const doc = sessionStorage.getItem('doc');
+      if (doc == null || doc === '') {
+        this.error('用户未登录');
+      }
+      this.doc = JSON.parse(doc);
+    },
     data() {
       return {
+        doc: '',
         columns1: [
           {
             title: '专家姓名',
@@ -57,6 +65,33 @@
           },
         ],
       };
+    },
+    methods: {
+//      login() {
+//        if (this.account === '' || this.pwd === '') {
+//          this.error('请输入账号和密码');
+//        } else {
+//          this.$ajax({
+//            method: 'post',
+//            url: expertLogin(),
+//            dataType: 'JSON',
+//            data: { account: this.account, pwd: this.account },
+//            contentType: 'application/json;charset=UTF-8',
+//          }).then((res) => {
+//            if (res.data === '') {
+//              this.error('账号或密码错误');
+//            } else {
+//              sessionStorage.setItem('doc', JSON.stringify(res.data));
+//              this.$router.push({ name: 'questionList' });
+//            }
+//          }).catch((error) => {
+//            console.log(error);
+//          });
+//        }
+//      },
+      error(data) {
+        this.$Message.error(data);
+      },
     },
   };
 </script>

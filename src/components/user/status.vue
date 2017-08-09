@@ -22,16 +22,21 @@
       </div>
     </Tab-pane>
     <Tab-pane label="流程进度">
-      <div class="warning">特别提醒：前往医院时检查和注射时，请携带个人身份证</div>
+      <div class="warning">
+        特别提醒：前往医院时检查和注射时，请携带个人身份证
+        <br/>
+        如有问题，请联系客服处理
+      </div>
       <br/>
-      <Steps :current="0" direction="vertical">
-        <Step title="筛查" content="您当前还未预约筛查，等待付款，付款信息确认中，准备筛查（2017-12-12 9:00，XXX医院，等待筛查结果）"></Step>
-        <Step title="完成筛查" content="阳性，阴性"></Step>
-        <Step title="注射服务" content="您当前还未预约服务，等待付款，付款信息确认中，付款信息已确认"></Step>
-        <Step title="购买疫苗" content="您当前还购买疫苗，等待付款，付款信息确认中，付款信息已确认"></Step>
-        <Step title="注射第一针" content="日程安排中，于2012-12-21 9:00 XXX医院接受第一次接种"></Step>
-        <Step title="注射第二针" content="日程安排中，于2012-12-21 9:00 XXX医院接受第二次接种"></Step>
-        <Step title="注射第三针" content="日程安排中，于2012-12-21 9:00 XXX医院接受第三次接种"></Step>
+      <Steps :current='this.list' direction="vertical" :status="this.jzs">
+        <Step title="筛查" :content='this.screeningtext'></Step>
+        <Step title="完成筛查" :content='this.screeningRes'></Step>
+        <Step title="注射服务" :content='this.injection'></Step>
+        <Step title="购买疫苗" :content='this.vaccine'></Step>
+        <Step title="注射第一针" :content="this.fist"></Step>
+        <Step title="注射第二针" :content="this.sec"></Step>
+        <Step title="注射第三针" :content="this.thr"></Step>
+        <Step title="完成注射"></Step>
       </Steps>
 
     </Tab-pane>
@@ -46,6 +51,14 @@
     data() {
       return {
         screening: '',
+        jzs: '',
+        screeningtext: '您尚未预约该服务',
+        screeningRes: '暂无结果',
+        injection: '您尚未预约该服务',
+        vaccine: '您尚未预约该服务',
+        fist: '尚未安排时间',
+        sec: '尚未安排时间',
+        thr: '尚未安排时间',
         list: '',
         info: '',
       };
@@ -55,8 +68,92 @@
       this.getUserAllStatus();
     },
     methods: {
-      getStatuses(data) {
-        console.log(data.substring(0, 1));
+      getStatuses(data, dd, ddd) {
+        if (dd === 1) {
+          if (data === 0) {
+            this.screeningtext = '你尚未预约该服务';
+          } else if (data === 3) {
+            this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
+          }
+        }
+
+        if (dd === 2) {
+          this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
+          if (data === 1) {
+            this.screeningRes = '可以接种';
+          } else if (data === 2) {
+            this.screeningRes = '不能接种';
+            if (dd === 2) {
+              this.jzs = 'error';
+            }
+          } else if (data === 3) {
+            this.screeningRes = '请根据专家建议选择接种';
+          }
+        }
+
+        if (dd === 3) {
+          this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
+          this.screeningRes = '可以接种';
+          if (data === 0) {
+            this.injection = '您尚未预约该服务';
+          } else if (data === 1) {
+            this.injection = '待付款，如已付款，请申请确认付款信息';
+          } else if (data === 2) {
+            this.injection = '付款信息确认中';
+          } else if (data === 3) {
+            this.injection = '已预约注射服务';
+          }
+        }
+
+        if (dd === 4) {
+          this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
+          this.screeningRes = '可以接种';
+          this.injection = '已预约注射服务';
+          if (data === 0) {
+            this.vaccine = '您尚未购买疫苗';
+          } else if (data === 1) {
+            this.vaccine = '待付款，如已付款，请申请确认付款信息';
+          } else if (data === 2) {
+            this.vaccine = '付款信息确认中';
+          } else if (data === 3) {
+            this.vaccine = '已购买疫苗，请等待安排注射时间';
+          }
+        }
+
+        if (dd === 5) {
+          this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
+          this.screeningRes = '可以接种';
+          this.injection = '已预约注射服务';
+          this.vaccine = '已购买疫苗，请等待安排注射时间';
+          if (data === 1) {
+            this.fist = '已安排第一针注射时间，请按照短信前往注射';
+            if (ddd === 1) {
+              this.fist = '第一针已注射';
+            }
+          } else if (data === 2) {
+            this.fist = '第一针已注射';
+            this.sec = '已安排第二针注射时间，请按照短信前往注射';
+            if (ddd === 1) {
+              this.sec = '第二针已注射';
+            }
+          } else if (data === 3) {
+            this.fist = '第一针已注射';
+            this.sec = '第二针已注射';
+            this.thr = '已安排第三针注射时间，请按照短信前往注射';
+            if (ddd === 1) {
+              this.thr = '第三针已注射';
+            }
+          }
+        }
+        if (dd === 6) {
+          this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
+          this.screeningRes = '可以接种';
+          this.injection = '已预约注射服务';
+          this.vaccine = '已购买疫苗，请等待安排注射时间';
+          this.fist = '第一针已注射';
+          this.sec = '第二针已注射';
+          this.thr = '第三针已注射';
+        }
       },
       getScreening() {
         this.$ajax({
@@ -77,7 +174,15 @@
           dataType: 'JSON',
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
-          this.list = res.data;
+          this.list = res.data[0] - 1;
+          const d = res.data[1] - 2;
+          if (res.data[0] === 5) {
+            this.list = 5 + d;
+          }
+          if (res.data[0] === 6) {
+            this.list = 7;
+          }
+          this.getStatuses(res.data[1], res.data[0], res.data[2]);
         }).catch((e) => {
           console.log(e);
           this.error('服务器有点忙，请稍后再试');
