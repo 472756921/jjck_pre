@@ -20,6 +20,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { expertGetQuestionList } from '../../interface';
+
   export default {
     name: 'questionList',
     created() {
@@ -28,67 +30,49 @@
         this.error('用户未登录');
       }
       this.doc = JSON.parse(doc);
+      this.getData();
     },
     data() {
       return {
         doc: '',
         columns1: [
           {
-            title: '专家姓名',
-            key: 'name',
+            title: '姓名',
+            key: 'userName',
           },
           {
             title: '问题',
-            key: 'age',
+            key: 'questionTitle',
           },
           {
             title: '时间',
-            key: 'address',
-          },
-          {
-            title: '操作',
-            key: 'operation',
+            key: 'createDate',
           },
         ],
-        data1: [
-          {
-            name: '王小明',
-            age: '北京市朝阳区芍药居',
-            address: '2012-12-12',
-            operation: '2012-12-12',
-          },
-          {
-            name: '张小刚',
-            age: '北京市朝阳区芍药居',
-            address: '2015-11-24',
-            operation: '<a href="#/questionAn?r=d">123</a>',
-          },
-        ],
+        data1: [],
       };
     },
     methods: {
-//      login() {
-//        if (this.account === '' || this.pwd === '') {
-//          this.error('请输入账号和密码');
-//        } else {
-//          this.$ajax({
-//            method: 'post',
-//            url: expertLogin(),
-//            dataType: 'JSON',
-//            data: { account: this.account, pwd: this.account },
-//            contentType: 'application/json;charset=UTF-8',
-//          }).then((res) => {
-//            if (res.data === '') {
-//              this.error('账号或密码错误');
-//            } else {
-//              sessionStorage.setItem('doc', JSON.stringify(res.data));
-//              this.$router.push({ name: 'questionList' });
-//            }
-//          }).catch((error) => {
-//            console.log(error);
-//          });
-//        }
-//      },
+      getData() {
+        if (this.account === '' || this.pwd === '') {
+          this.error('请输入账号和密码');
+        } else {
+          const exID = this.doc.id;
+          const t = '?expertID=';
+          const par = t + exID;
+          console.log(this.doc);
+          this.$ajax({
+            method: 'get',
+            url: expertGetQuestionList() + par,
+            dataType: 'JSON',
+            contentType: 'application/json;charset=UTF-8',
+          }).then((res) => {
+            this.data1 = res.data.question;
+          }).catch((error) => {
+            console.log(error);
+          });
+        }
+      },
       error(data) {
         this.$Message.error(data);
       },

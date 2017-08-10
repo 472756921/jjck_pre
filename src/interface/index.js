@@ -112,3 +112,10 @@ export const expertLogin = function () {
   const API = Host + URL;
   return API;
 };
+
+// 专家获取问题列表
+export const expertGetQuestionList = function () {
+  const URL = '/expert/expertGetQuestionList';
+  const API = Host + URL;
+  return API;
+};
