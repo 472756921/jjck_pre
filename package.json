@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "echarts": "^3.6.2",
     "iview": "^2.0.0",
     "snabbt.js": "^0.6.4",
     "vue": "^2.3.3",

@@ -18,6 +18,19 @@ import QuestionNew from '@/components/expert/question';
 import UserQuestionList from '@/components/expert/userQuestionList';
 import Login from '@/components/expert/login';
 import QuestionList from '@/components/expert/questionList';
+import AdminLogin from '@/components/admin/adminLogin';
+import AdminIndex from '@/components/admin/adminIndex';
+import AdminData from '@/components/admin/adminData';
+import AdminUserScreening from '@/components/admin/adminUser_screening';
+import AdminUserInjection from '@/components/admin/adminUser_injection';
+import AdminUserVaccine from '@/components/admin/adminUser_vaccine';
+import AdminUserVaccineInjection from '@/components/admin/adminUser_vaccine_injection';
+import AdminTeamList from '@/components/admin/adminTeamList';
+import AdminTeamListEdit from '@/components/admin/adminTeamListEdit';
+import AdminList from '@/components/admin/adminList';
+import AdminNew from '@/components/admin/adminNew';
+import BankList from '@/components/admin/bankList';
+import BankNew from '@/components/admin/bankNew';
 
 Vue.use(Router);
 Vue.use(iView);
@@ -109,5 +122,74 @@ export default new Router({
       name: 'questionList',
       component: QuestionList,
     },
+
+
+    {
+      path: '/adminLogin',
+      name: 'adminLogin',
+      component: AdminLogin,
+    },
+    {
+      path: '/adminIndex',
+      name: 'adminIndex',
+      component: AdminIndex,
+      children: [
+        {
+          path: 'adminData',
+          component: AdminData,
+        },
+        {
+          path: 'adminUser_screening',
+          component: AdminUserScreening,
+        },
+        {
+          path: 'adminUser_injection',
+          component: AdminUserInjection,
+        },
+        {
+          path: 'adminUser_vaccine',
+          component: AdminUserVaccine,
+        },
+        {
+          path: 'adminUser_vaccine_injection',
+          component: AdminUserVaccineInjection,
+        },
+        {
+          path: 'adminTeamList',
+          component: AdminTeamList,
+        },
+        {
+          path: 'adminTeamListEdit',
+          name: 'adminTeamListEdit',
+          component: AdminTeamListEdit,
+        },
+        {
+          path: 'adminTeamNew',
+          name: 'adminTeamNew',
+          component: AdminTeamListEdit,
+        },
+        {
+          path: 'adminList',
+          name: 'adminList',
+          component: AdminList,
+        },
+        {
+          path: 'adminNew',
+          name: 'adminNew',
+          component: AdminNew,
+        },
+        {
+          path: 'bankList',
+          name: 'bankList',
+          component: BankList,
+        },
+        {
+          path: 'bankNew',
+          name: 'bankNew',
+          component: BankNew,
+        },
+      ],
+    },
+
   ],
 });

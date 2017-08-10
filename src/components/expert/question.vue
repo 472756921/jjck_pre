@@ -17,13 +17,13 @@
     <Input v-if="this.rout == 'd'"  v-model="answer" type="textarea" :autosize="{minRows: 5,maxRows: 5}" :maxlength=200 placeholder="回复问题（200字以内）"></Input> <br/>
     <br/>
     <Button type="success" class="center" v-if="this.rout == 'userNew'" @click="post">提问</Button>
-    <Button type="success" class="center" v-if="this.rout == 'd'">回复</Button>
+    <Button type="success" class="center" v-if="this.rout == 'd'" @click="back">回复</Button>
     </Col>
   </Row>
 </template>
 
 <script type="text/ecmascript-6">
-  import { postUserQusetion } from '../../interface';
+  import { postUserQusetion, docAnwser } from '../../interface';
   import { mackINFO } from '../ut/returnINFO';
 
   export default {
@@ -33,6 +33,12 @@
       this.doctorID = this.$route.params.docID;
       if (this.rout === 'd' || this.rout === 'userAN') {
         this.isDisabled = true;
+      }
+      if (this.rout === 'd') {
+        this.questionID = this.$route.params.questisonID;
+        const que = JSON.parse(sessionStorage.getItem('qustion'));
+        this.questionTitle = que.questionTitle;
+        this.question = que.question;
       }
       this.userQuestionTime = sessionStorage.getItem('userQuestionTime');
     },
@@ -45,9 +51,29 @@
         doctorID: '',
         userQuestionTime: '',
         isDisabled: false,
+        questionID: '',
       };
     },
     methods: {
+      back() {
+        const question = {
+          anwser: this.answer,
+          questionID: this.questionID,
+        };
+        this.$ajax({
+          method: 'POST',
+          url: docAnwser(),
+          dataType: 'JSON',
+          data: question,
+        }).then((res) => {
+          if (res.data === 1) {
+            this.success('提交成功');
+            this.rout = '123';
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
       post() {
         if (this.userQuestionTime <= 0) {
           this.error('对不起，您的咨询次数已经用尽');

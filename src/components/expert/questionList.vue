@@ -3,14 +3,14 @@
     <Col :sm="24" :md="{ span: 20, offset: 2 }">
       <div>{{doc.name}}，您好！</div>
       <div>
-        <span>累计咨询量：<span class="red">2003</span>人/次 ， 累计回复量：<span class="green">2003</span>人/次</span>
+        <span>累计咨询量：<span class="red">{{this.totleNum}}</span>人/次 ， 累计回复量：<span class="green">{{this.totleNumAn}}</span>人/次</span>
         <br/>
-        <span>本月咨询量：<span class="red">2003</span>人/次 ， 本月回复量：<span class="green">2003</span>人/次</span>
+        <span>本月咨询量：<span class="red">{{this.monthNum}}</span>人/次 ， 本月回复量：<span class="green">{{this.monthNumAn}}</span>人/次</span>
       </div>
       <br/>
       <h3>待回复问题列表</h3>
       <br/>
-      <Table :columns="columns1" :data="data1"></Table>
+      <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
       <br/>
       <div class="center">
         <Page class="center" :current="1" :total="22" simple></Page>
@@ -35,6 +35,10 @@
     data() {
       return {
         doc: '',
+        monthNum: '',
+        monthNumAn: '',
+        totleNum: '',
+        totleNumAn: '',
         columns1: [
           {
             title: '姓名',
@@ -48,11 +52,20 @@
             title: '时间',
             key: 'createDate',
           },
+          {
+            title: '操作',
+            key: 'action',
+            render: this.get,
+          },
         ],
         data1: [],
       };
     },
     methods: {
+      clickList(data, index) {
+        sessionStorage.setItem('qustion', JSON.stringify(this.data1[index]));
+        this.$router.push({ name: 'questionNew', params: { r: 'd', questisonID: data } });
+      },
       getData() {
         if (this.account === '' || this.pwd === '') {
           this.error('请输入账号和密码');
@@ -68,6 +81,10 @@
             contentType: 'application/json;charset=UTF-8',
           }).then((res) => {
             this.data1 = res.data.question;
+            this.monthNum = res.data.monthNum + res.data.monthNumAn;
+            this.monthNumAn = res.data.monthNumAn;
+            this.totleNum = res.data.totleNum + res.data.totleNumAn;
+            this.totleNumAn = res.data.totleNumAn;
           }).catch((error) => {
             console.log(error);
           });
@@ -75,6 +92,21 @@
       },
       error(data) {
         this.$Message.error(data);
+      },
+      get(h, params) {
+        return h('div', [
+          h('Button', {
+            props: {
+              type: 'text',
+              size: 'small',
+            },
+            on: {
+              click: () => {
+                this.clickList(params.row.id, params.index);
+              },
+            },
+          }, '查看'),
+        ]);
       },
     },
   };

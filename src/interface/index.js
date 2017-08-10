@@ -119,3 +119,135 @@ export const expertGetQuestionList = function () {
   const API = Host + URL;
   return API;
 };
+
+// 专家回答
+export const docAnwser = function () {
+  const URL = '/expert/docAnwser';
+  const API = Host + URL;
+  return API;
+};
+
+// 管理员登录
+export const adminLogin = function () {
+  const URL = '/public/adminLogin';
+  const API = Host + URL;
+  return API;
+};
+
+// 管理员获取筛查人数
+export const screeningList = function () {
+  const URL = '/public/getNeedScreeningUsers';
+  const API = Host + URL;
+  return API;
+};
+
+// 管理员获取预约注射人数
+export const injection = function () {
+  const URL = '/public/getNeedInjectionServiceUsers';
+  const API = Host + URL;
+  return API;
+};
+
+// 管理员获取购买疫苗人数
+export const adminvaccine = function () {
+  const URL = '/public/getNeedVaccineConfirmationUsers';
+  const API = Host + URL;
+  return API;
+};
+// 确认疫苗费用
+export const updateUserVaccineConfirmation = function () {
+  const URL = '/public/updateUserVaccineConfirmation';
+  const API = Host + URL;
+  return API;
+};
+
+// 管理员获取购买疫苗人数
+export const adminUserVaccineInjection = function () {
+  const URL = '/public/getToBeinjectedUsers';
+  const API = Host + URL;
+  return API;
+};
+
+// 创建筛查
+export const createScreening = function () {
+  const URL = '/public/createScreening';
+  const API = Host + URL;
+  return API;
+};
+// 修改筛查
+export const updateScreeningDate = function () {
+  const URL = '/public/updateScreeningDate';
+  const API = Host + URL;
+  return API;
+};
+
+// 录入筛查结果
+export const updateScreeningRes = function () {
+  const URL = '/public/updateScreeningRes';
+  const API = Host + URL;
+  return API;
+};
+// 确认用户付款
+export const updateUserInjectionService = function () {
+  const URL = '/public/updateUserInjectionService';
+  const API = Host + URL;
+  return API;
+};
+// 修改团队信息
+export const updataTeam = function () {
+  const URL = '/public/updataTeam';
+  const API = Host + URL;
+  return API;
+};
+
+export const newTeam = function () {
+  const URL = '/public/newTeam';
+  const API = Host + URL;
+  return API;
+};
+
+export const adminList = function () {
+  const URL = '/public/getAdmins';
+  const API = Host + URL;
+  return API;
+};
+export const delAdmin = function () {
+  const URL = '/public/deleteAdmin';
+  const API = Host + URL;
+  return API;
+};
+export const updateAdminStatus = function () {
+  const URL = '/public/updateAdminStatus';
+  const API = Host + URL;
+  return API;
+};
+export const resetAdminPassWord = function () {
+  const URL = '/public/resetAdminPassWord';
+  const API = Host + URL;
+  return API;
+};
+export const registerAdmin = function () {
+  const URL = '/public/registerAdmin';
+  const API = Host + URL;
+  return API;
+};
+export const bankList = function () {
+  const URL = '/public/getBanks';
+  const API = Host + URL;
+  return API;
+};
+export const updateBanksStatus = function () {
+  const URL = '/public/updateBanksStatus';
+  const API = Host + URL;
+  return API;
+};
+export const deleteBank = function () {
+  const URL = '/public/deleteBank';
+  const API = Host + URL;
+  return API;
+};
+export const saveBank = function () {
+  const URL = '/public/saveBank';
+  const API = Host + URL;
+  return API;
+};
