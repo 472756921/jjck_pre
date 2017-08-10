@@ -163,7 +163,7 @@ export const updateUserVaccineConfirmation = function () {
 
 // 管理员获取购买疫苗人数
 export const adminUserVaccineInjection = function () {
-  const URL = '/public/getToBeinjectedUsers';
+  const URL = '/public/jiezhong';
   const API = Host + URL;
   return API;
 };

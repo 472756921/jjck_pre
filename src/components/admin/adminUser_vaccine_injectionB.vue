@@ -13,6 +13,7 @@
     data() {
       return {
         user: '',
+        times: '',
         columns1: [
           {
             title: '姓名',
@@ -44,15 +45,25 @@
       };
     },
     created() {
+      const pa = this.$route.path;
+      if (pa.indexOf('adminUser_vaccine_injectionA') !== -1) {
+        this.times = 1;
+      }
+      if (pa.indexOf('adminUser_vaccine_injectionB') !== -1) {
+        this.times = 2;
+      }
+      if (pa.indexOf('adminUser_vaccine_injectionC') !== -1) {
+        this.times = 3;
+      }
       this.getData();
     },
     methods: {
       getData() {
+        const par = '?time=';
         this.$ajax({
-          method: 'post',
-          url: adminUserVaccineInjection(),
+          method: 'get',
+          url: adminUserVaccineInjection() + par + this.times,
           dataType: 'JSON',
-          data: { page: 1, userName: '' },
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
           console.log(res.data);

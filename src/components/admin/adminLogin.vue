@@ -40,11 +40,13 @@
           }).then((res) => {
             if (res.data.message === '用户不存在' || res.data.message === '密码错误') {
               this.error('账号或密码错误');
-            } else {
-              sessionStorage.setItem('admin', res.data);
             }
-          }).catch((error) => {
-            console.log(error);
+            if (res.data.message === '登录成功') {
+              sessionStorage.setItem('admin', res.data);
+              this.$router.push({ name: 'adminData' });
+            }
+          }).catch(() => {
+            this.error('糟糕，服务器不见了');
           });
         }
       },

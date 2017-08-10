@@ -22,7 +22,9 @@
             <Menu-item name="adminUser_screening">筛查</Menu-item>
             <Menu-item name="adminUser_injection">注射</Menu-item>
             <Menu-item name="adminUser_vaccine">疫苗</Menu-item>
-            <Menu-item name="adminUser_vaccine_injection">接种</Menu-item>
+            <Menu-item name="adminUser_vaccine_injectionA">第一次接种</Menu-item>
+            <Menu-item name="adminUser_vaccine_injectionB">第二次接种</Menu-item>
+            <Menu-item name="adminUser_vaccine_injectionC">第三次接种</Menu-item>
           </Submenu>
           <Submenu name="3">
             <template slot="title">
@@ -79,7 +81,7 @@
       created() {
         const admin = sessionStorage.getItem('admin');
         if (admin === '' || admin == null) {
-          alert('1231');
+          this.$router.push({ name: 'adminLogin' });
         }
       },
       methods: {

@@ -24,7 +24,9 @@ import AdminData from '@/components/admin/adminData';
 import AdminUserScreening from '@/components/admin/adminUser_screening';
 import AdminUserInjection from '@/components/admin/adminUser_injection';
 import AdminUserVaccine from '@/components/admin/adminUser_vaccine';
-import AdminUserVaccineInjection from '@/components/admin/adminUser_vaccine_injection';
+import AdminUserVaccineInjectionA from '@/components/admin/adminUser_vaccine_injectionA';
+import AdminUserVaccineInjectionB from '@/components/admin/adminUser_vaccine_injectionB';
+import AdminUserVaccineInjectionC from '@/components/admin/adminUser_vaccine_injectionC';
 import AdminTeamList from '@/components/admin/adminTeamList';
 import AdminTeamListEdit from '@/components/admin/adminTeamListEdit';
 import AdminList from '@/components/admin/adminList';
@@ -136,6 +138,7 @@ export default new Router({
       children: [
         {
           path: 'adminData',
+          name: 'adminData',
           component: AdminData,
         },
         {
@@ -151,8 +154,16 @@ export default new Router({
           component: AdminUserVaccine,
         },
         {
-          path: 'adminUser_vaccine_injection',
-          component: AdminUserVaccineInjection,
+          path: 'adminUser_vaccine_injectionA',
+          component: AdminUserVaccineInjectionA,
+        },
+        {
+          path: 'adminUser_vaccine_injectionB',
+          component: AdminUserVaccineInjectionB,
+        },
+        {
+          path: 'adminUser_vaccine_injectionC',
+          component: AdminUserVaccineInjectionC,
         },
         {
           path: 'adminTeamList',
