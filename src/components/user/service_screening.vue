@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src='imgsrc' width="115%" class="banner"/>
+    <img :src='imgsrc' width='115%' class='banner'/>
     <br/>
     <br/>
     <div>
@@ -9,7 +9,7 @@
     </div>
     <br/>
     <P>
-      该服务免费为您提供正规医疗机构HVP检测项目的预约、检测及结果解析服务，为您后续正确就诊处方HPV疫苗提供帮助支持。
+      该服务免费为您提供正规医疗机构HVP检测项目的预约、检测及结果解析、专家咨询建议等服务，为您后续正确就诊处方HPV疫苗提供帮助支持。
     </P>
     <br/>
     <div>
@@ -18,12 +18,11 @@
       <p>如果您在购买中遇到任何问题，请联系客服处理哦。</p>
     </div>
     <br/>
-    <Button type="primary" class="center" @click="screening">确认支付检测费用</Button>
-    <div class="red">（该项检测不适用于无性检验女性，请谨慎选择）</div>
+    <Button type='primary' class='center' @click='screening'>支付预约服务费用</Button>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script type='text/ecmascript-6'>
   import { screening } from '../../interface';
   import img from '../../assets/banner.png';
 
@@ -34,6 +33,9 @@
         imgsrc: img,
       };
     },
+    created() {
+      console.log(window.WeixinJSBridge);
+    },
     methods: {
       screening() {
         this.$ajax({
@@ -42,13 +44,20 @@
           dataType: 'JSON',
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
-          if (res.data === 1) {
-            this.success('预约成功');
+          if (typeof window.WeixinJSBridge === 'undefined') {
+            if (document.addEventListener) {
+              document.addEventListener('window.WeixinJSBridgeReady',
+                this.onBridgeReady, false);
+            } else if (document.attachEvent) {
+              document.attachEvent('window.WeixinJSBridgeReady', this.onBridgeReady);
+              document.attachEvent('window.onWeixinJSBridgeReady', this.onBridgeReady);
+            }
+          } else {
+            this.onBridgeReady(res.data.appId, res.data.nonceStr,
+              res.data.package, res.data.paySign, res.data.timeStamp);
           }
-          if (res.data === 1308) {
-            this.error('您已经预约该服务，请勿重复预约');
-          }
-        }).catch(() => {
+        }).catch((e) => {
+          console.log(e);
           this.error('服务器有点忙，请稍后再试');
         });
       },
@@ -57,6 +66,23 @@
       },
       success(data) {
         this.$Message.success(data);
+      },
+      onBridgeReady(appIdV, nonceStrV, prepayIdV, paySignV, timeStampV) {
+        window.WeixinJSBridge.invoke(
+          'getBrandWCPayRequest', {
+            'appId': appIdV,
+            'timeStamp': timeStampV.toString(),
+            'nonceStr': nonceStrV,
+            'package': 'prepay_id=' + prepayIdV,
+            'signType': 'MD5',
+            'paySign': paySignV,
+          },
+          (res) => {
+            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              location.reload();
+            }
+          },
+        );
       },
     },
   };
@@ -75,6 +101,7 @@
   .red {
     color: #ed3f14;
     text-align: center;
-    line-height: 2rem;
+    line-height: 1.4rem;
+    font-size: 1rem;
   }
 </style>

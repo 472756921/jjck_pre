@@ -12,7 +12,7 @@
               数据
             </template>
             <Menu-item name="adminData">总体数据</Menu-item>
-            <Menu-item name="adminData1">月数据</Menu-item>
+            <Menu-item name="adminData">月数据</Menu-item>
           </Submenu>
           <Submenu name="2">
             <template slot="title">

@@ -1,18 +1,22 @@
 <template>
   <div>
-    <h3>注射服务</h3>
+    <h3>银行账号管理</h3>
+    汇率：<input  v-model='hl'> <button @click="updateRates">修改</button>
+    <br/>
+    <br/>
     <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { bankList, updateBanksStatus, deleteBank } from '../../interface';
+  import { bankList, updateBanksStatus, deleteBank, getRate, updateRate } from '../../interface';
 
   export default {
     name: 'bankList',
     data() {
       return {
         user: '',
+        hl: '',
         columns1: [
           {
             title: '账号',
@@ -41,6 +45,7 @@
     },
     created() {
       this.getData();
+      this.gethl();
     },
     methods: {
       getData() {
@@ -51,6 +56,33 @@
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
           this.data1 = res.data;
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      gethl() {
+        this.$ajax({
+          method: 'get',
+          url: getRate(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          this.hl = res.data;
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      updateRates() {
+        this.$ajax({
+          method: 'post',
+          url: updateRate(),
+          dataType: 'JSON',
+          data: { rate: this.hl },
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 603) {
+            this.success('修改成功');
+          }
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');
         });
@@ -122,6 +154,9 @@
       },
       error(data) {
         this.$Message.error(data);
+      },
+      success(data) {
+        this.$Message.success(data);
       },
     },
   };

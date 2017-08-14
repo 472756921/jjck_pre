@@ -2,8 +2,8 @@
  * Created by Benson on 2017/8/7.
  */
 
- //const Host = 'http://www.bensonchen.cn/jjck';
-const Host = 'http://localhost:8080';
+  //const Host = 'http://www.bensonchen.cn/jjck';
+ const Host = 'http://localhost:8080';
 
 // 用户注册
 export const userReg = function () {
@@ -32,7 +32,12 @@ export const getTeamList = function () {
   return API;
 };
 
-
+// 获取团队列表
+export const getTeamTeamDate = function () {
+  const URL = '/public/getTeamStatistics';
+  const API = Host + URL;
+  return API;
+};
 // 用户获取用户个人提问列表
 export const getUserQusetionList = function () {
   const URL = '/expert/getUserQusetionList';
@@ -56,7 +61,7 @@ export const getExpertList = function () {
 
 // 预约筛查服务
 export const screening = function () {
-  const URL = '/user/makeANAppointment';
+  const URL = '/user/weixinPay';
   const API = Host + URL;
   return API;
 };
@@ -249,6 +254,16 @@ export const registerAdmin = function () {
 };
 export const bankList = function () {
   const URL = '/public/getBanks';
+  const API = Host + URL;
+  return API;
+};
+export const getRate = function () {
+  const URL = '/public/getRate';
+  const API = Host + URL;
+  return API;
+};
+export const updateRate = function () {
+  const URL = '/public/updateRate';
   const API = Host + URL;
   return API;
 };

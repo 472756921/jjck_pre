@@ -15,9 +15,9 @@
       <br/>
       <br/>
       <br/>
-      <Button type="primary" class="center" @click="service('screening')">预约HPV筛查</Button>
+      <Button type="primary" class="center" @click="service('screening')">预约服务</Button>
       <br/>
-      <Button type="primary" class="center" @click="service('injection')">处方疫苗就诊安排</Button>
+      <Button type="primary" class="center" @click="service('injection')">开始免疫服务</Button>
       <br/>
       <Button type="primary" class="center" @click="service('vaccine')">疫苗</Button>
     </div>
