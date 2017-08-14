@@ -4,7 +4,7 @@
       <i-col span="5" class="layout-menu-left">
         <Menu active-name="1-1" theme="dark" width="auto" :open-names="['1']" @on-select="push">
           <div class="layout-logo-left">
-            久佳辰康后台系统
+            <div class="tw">久佳辰康后台系统</div>
           </div>
           <Submenu name="1">
             <template slot="title">
@@ -55,7 +55,7 @@
       <i-col span="19">
         <div class="layout-header">
           <br/>
-          <h2>&nbsp;&nbsp;&nbsp;久佳辰康后台系统</h2>
+          <h2>&nbsp;&nbsp;&nbsp;久佳辰康</h2>
         </div>
         <div class="layout-content">
           <div class="layout-content-main">
@@ -129,5 +129,10 @@
     background: #5b6270;
     border-radius: 3px;
     margin: 15px auto;
+  }
+  .tw {
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 3px 10px;
   }
 </style>

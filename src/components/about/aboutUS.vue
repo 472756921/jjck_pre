@@ -1,6 +1,6 @@
 <template>
     <div>
-      <img src="../../assets/banner.png" width="115%" class="banner"/>
+      <img :src='imgsrc' width="115%" class="banner"/>
       <br/>
       <br/>
       <h2>关于我们</h2>
@@ -13,8 +13,15 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import img from '../../assets/banner.png';
+
   export default {
     name: 'aboutUS',
+    data() {
+      return {
+        imgsrc: img,
+      };
+    },
   };
 </script>
 

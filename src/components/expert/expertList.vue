@@ -8,7 +8,7 @@
         <p slot="title">{{item.name}}</p>
         <Row>
           <Col span="8">
-          <img :src="'http://localhost:8080'+item.headimg" width="75" class="center"/>
+          <img :src="item.headimg" width="75" class="center"/>
           </Col>
           <Col span="16">
           <div class="title">{{item.position}}</div>

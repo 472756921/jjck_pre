@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="../../assets/banner.png" width="115%" class="banner"/>
+    <img :src='imgsrc' width="115%" class="banner"/>
     <br/>
     <br/>
     <div>
@@ -27,12 +27,14 @@
 
 <script type="text/ecmascript-6">
   import { payLast, payLastGO, getShopType } from '../../interface';
+  import img from '../../assets/banner.png';
 
   export default {
     name: 'injection',
     data() {
       return {
         screeningStatus: '',
+        imgsrc: img,
       };
     },
     created() {

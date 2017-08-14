@@ -10,17 +10,26 @@
       <Date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择日期和时间"  v-model='date' style="width: 200px" @on-change="date=$event"></Date-picker>
     </Modal>
     <Modal
+      v-model="modal2"
+      title="修改时间"
+      @on-ok="asyncOK2">
+      <p>请选择注射时间</p>
+      <Date-picker type="datetime" format="yyyy-MM-dd HH:mm" placeholder="选择日期和时间"  v-model='date' style="width: 200px" @on-change="date=$event"></Date-picker>
+    </Modal>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { adminUserVaccineInjection } from '../../interface';
+  import { adminUserVaccineInjection, jiezhongFis, updateVa, over } from '../../interface';
 
   export default {
     name: 'adminUser_vaccine_injectionA',
     data() {
       return {
         modal: false,
+        modal2: false,
+        opdationID: '',
+        userID: '',
         date: '',
         user: '',
         times: '',
@@ -60,7 +69,7 @@
                     },
                     on: {
                       click: () => {
-                        this.changeData(b.row.id);
+                        this.changeData(b.row.id, b.row.vaccinateDate);
                       },
                     },
                   }, '修改时间'),
@@ -86,7 +95,7 @@
                     },
                     on: {
                       click: () => {
-                        this.newDate(b.row.id);
+                        this.newDate(b.row.id, b.row.userID);
                       },
                     },
                   }, '设置时间'),
@@ -116,9 +125,68 @@
           this.error('服务器有点忙，请稍后再试');
         });
       },
-      newDate(id) {
+      newDate(vid, userID) {
         this.modal = true;
-        console.log(id);
+        this.userID = userID;
+      },
+      changeData(vid, date) {
+        this.modal2 = true;
+        this.date = date;
+        this.opdationID = vid;
+      },
+      asyncOK() {
+        this.$ajax({
+          method: 'POST',
+          url: jiezhongFis(),
+          data: { vaID: this.userID, date: this.date, times: 1 },
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 1) {
+            location.reload();
+          }
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      over(vid) {
+        const message = confirm('确认该用户已完成注射');
+        if (message === true) {
+          const par = '?vaccID=';
+          this.$ajax({
+            method: 'get',
+            url: over() + par + vid.toString(),
+            dataType: 'JSON',
+            contentType: 'application/json;charset=UTF-8',
+          }).then((res) => {
+            if (res.data === 1) {
+              location.reload();
+            }
+          }).catch(() => {
+            this.error('服务器有点忙，请稍后再试');
+          });
+        }
+      },
+      asyncOK2() {
+        this.$ajax({
+          method: 'POST',
+          url: updateVa(),
+          data: { vaID: this.opdationID, date: this.date, times: 1 },
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 1) {
+            location.reload();
+          }
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      error(data) {
+        this.$Message.error(data);
+      },
+      success(data) {
+        this.$Message.success(data);
       },
     },
   };

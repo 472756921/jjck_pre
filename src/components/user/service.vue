@@ -1,6 +1,6 @@
 <template>
     <div>
-      <img src="../../assets/banner.png" width="115%" class="banner"/>
+      <img :src='imgsrc' width="115%" class="banner"/>
       <br/>
       <br/>
       <div>
@@ -24,8 +24,15 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import img from '../../assets/banner.png';
+
   export default {
     name: 'service',
+    data() {
+      return {
+        imgsrc: img,
+      };
+    },
     methods: {
       service(type) {
         this.$router.push({ name: type });

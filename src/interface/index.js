@@ -2,6 +2,7 @@
  * Created by Benson on 2017/8/7.
  */
 
+ //const Host = 'http://www.bensonchen.cn/jjck';
 const Host = 'http://localhost:8080';
 
 // 用户注册
@@ -164,6 +165,21 @@ export const updateUserVaccineConfirmation = function () {
 // 管理员获取购买疫苗人数
 export const adminUserVaccineInjection = function () {
   const URL = '/public/jiezhong';
+  const API = Host + URL;
+  return API;
+};
+export const jiezhongFis = function () {
+  const URL = '/public/jiezhongFis';
+  const API = Host + URL;
+  return API;
+};
+export const updateVa = function () {
+  const URL = '/public/updateVa';
+  const API = Host + URL;
+  return API;
+};
+export const over = function () {
+  const URL = '/public/over';
   const API = Host + URL;
   return API;
 };
