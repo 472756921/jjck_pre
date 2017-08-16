@@ -2,8 +2,8 @@
  * Created by Benson on 2017/8/7.
  */
 
-  //const Host = 'http://www.bensonchen.cn/jjck';
- const Host = 'http://localhost:8080';
+  const Host = 'http://www.bensonchen.cn/jjck';
+ //const Host = 'http://localhost:8080';
 
 // 用户注册
 export const userReg = function () {
@@ -11,7 +11,17 @@ export const userReg = function () {
   const API = Host + URL;
   return API;
 };
-
+// 获取用户状态
+export const getUserStep = function () {
+  const URL = '/user/getUserStep';
+  const API = Host + URL;
+  return API;
+};
+export const tjiaoguo = function () {
+  const URL = '/user/tjiaoguo';
+  const API = Host + URL;
+  return API;
+};
 // 获取用户信息
 export const getUserInfo = function () {
   const URL = '/user/userInfo';

@@ -18,12 +18,13 @@
       <p>如果您在购买中遇到任何问题，请联系客服处理哦。</p>
     </div>
     <br/>
-    <Button type='primary' class='center' @click='screening'>支付预约服务费用</Button>
+    <Button type='primary' class='center' @click='screening' v-if="this.res<12140">支付预约服务费用</Button>
+    <p class="textcenter" v-if="this.res==12140">细胞学筛查不适用于无性经验女性。如果是，请<br/><span class="bull" @click="tiaoguo">自愿跳过筛查</span></p>
   </div>
 </template>
 
 <script type='text/ecmascript-6'>
-  import { screening } from '../../interface';
+  import { screening, getUserStep, tjiaoguo } from '../../interface';
   import img from '../../assets/banner.png';
 
   export default {
@@ -31,12 +32,44 @@
     data() {
       return {
         imgsrc: img,
+        res: '',
       };
     },
     created() {
-      console.log(window.WeixinJSBridge);
+      this.getUserSteps();
     },
     methods: {
+      tiaoguo() {
+        const message = confirm('确认自愿跳过筛查？跳过筛查后如产生任何问题将由用户自行承担');
+        if (message === true) {
+          this.$ajax({
+            method: 'get',
+            url: tjiaoguo(),
+            dataType: 'JSON',
+            contentType: 'application/json;charset=UTF-8',
+          }).then((res) => {
+            if (res.data === 1) {
+              this.success('您已跳过筛查检测，请等待接种安排');
+            }
+          }).catch((e) => {
+            console.log(e);
+            this.error('服务器有点忙，请稍后再试');
+          });
+        }
+      },
+      getUserSteps() {
+        this.$ajax({
+          method: 'get',
+          url: getUserStep(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+            this.res = res.data;
+        }).catch((e) => {
+          console.log(e);
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
       screening() {
         this.$ajax({
           method: 'get',
@@ -93,15 +126,20 @@
     position: relative;
     margin: -18px;
   }
+  .textcenter{
+    text-align: center;
+    color: #ed3f14;
+  }
   .center{
     width: 200px;
     display: block;
     margin: 0 auto;
   }
-  .red {
-    color: #ed3f14;
+  .bull {
+    color: #4679ed;
     text-align: center;
     line-height: 1.4rem;
     font-size: 1rem;
   }
+
 </style>
