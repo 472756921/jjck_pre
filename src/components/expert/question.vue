@@ -80,7 +80,6 @@
           return;
         }
         const question = {
-          userID: 3,
           questionTitle: this.questionTitle,
           question: this.question,
           doctorID: this.doctorID,

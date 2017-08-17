@@ -21,17 +21,12 @@
     <br/>
     <div>
       <span>团队选择：</span>
-      <Button type="primary" size="small" @click="chooes">选择团队</Button>
-      <span>{{teamName}}</span>
+      <TeamList />
     </div>
     <br/>
     <div id="aaa" >
       <Checkbox v-model="single" class="ttt"><a href="#/agreement">我已阅读并同意《重庆久佳健康协议》</a></Checkbox>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
     <br/>
     <div class="center warning">{{warning}}</div>
     <br/>
@@ -43,12 +38,14 @@
   import { userReg } from '../../interface';
   import IDCheck from '../ut/IDNumberCheck';
   import { mackINFO } from '../ut/returnINFO';
+  import TeamList from '../team/teamList';
 
   const snabbt = require('snabbt.js');
 
 
   export default {
     name: 'reg',
+    components: { TeamList },
     data() {
       return {
         userName: '',
@@ -62,11 +59,14 @@
       };
     },
     methods: {
-      chooes() {
-        sessionStorage.setItem('nweUser', JSON.stringify({ userName: this.userName, numberID: this.numberID, phone: this.phone, address: this.address }));
-        this.$router.push('teamList');
-      },
       reg() {
+        const team = sessionStorage.getItem('UCTID');
+        if (team !== '' && team !== null) {
+          const teams = JSON.parse(team);
+          this.teamID = teams.teamID;
+        } else {
+          this.error('请选择团队');
+        }
         sessionStorage.removeItem('nweUser');
         if (this.userName === '' || this.numberID === '' || this.phone === '' || this.address === '') {
           this.error('请完整填写注册信息');
@@ -131,13 +131,6 @@
         this.numberID = newUsers.numberID;
         this.phone = newUsers.phone;
         this.address = newUsers.address;
-      }
-      const team = sessionStorage.getItem('UCTID');
-      if (team !== '' && team !== null) {
-        const teams = JSON.parse(team);
-        const St = '已选择团队';
-        this.teamName = St + teams.teamName;
-        this.teamID = teams.teamID;
       }
     },
   };

@@ -15,27 +15,45 @@
       <br/>
       <br/>
       <br/>
-      <Button type="primary" class="center" @click="service('screening')">预约服务</Button>
+      <Button :type="status==1?'primary':''" class="center" @click="service('screening')">预约服务</Button>
       <br/>
-      <Button type="primary" class="center" @click="service('injection')">开始免疫服务</Button>
+      <Button :type="status==2?'primary':''" class="center" @click="service('injection')">开始免疫服务</Button>
       <br/>
-      <Button type="primary" class="center" @click="service('vaccine')">疫苗</Button>
+      <Button :type="status==3?'primary':''" class="center" @click="service('vaccine')">疫苗</Button>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
   import img from '../../assets/banner.png';
+  import { getUserAllStatus } from '../../interface';
 
   export default {
     name: 'service',
     data() {
       return {
         imgsrc: img,
+        status: 1,
       };
+    },
+    created() {
+      this.getUserAllStatus();
     },
     methods: {
       service(type) {
         this.$router.push({ name: type });
+      },
+      getUserAllStatus() {
+        this.$ajax({
+          method: 'get',
+          url: getUserAllStatus(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          this.status = res.data[0];
+        }).catch((e) => {
+          console.log(e);
+          this.error('服务器有点忙，请稍后再试');
+        });
       },
     },
   };
@@ -45,6 +63,9 @@
   .banner{
     position: relative;
     margin: -18px;
+  }
+  .no {
+    background: red;
   }
   .center{
     width: 200px;
