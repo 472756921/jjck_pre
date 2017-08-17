@@ -18,7 +18,7 @@
       <p>如果您在购买中遇到任何问题，请联系客服处理哦。</p>
     </div>
     <br/>
-    <Button type='primary' class='center' @click='screening' v-if="this.res<12140">支付预约服务费用</Button>
+    <Button type='primary' class='center' @click='screening' v-if="this.res < 12140 && this.res != 404">支付预约服务费用</Button>
     <p class="textcenter" v-if="this.res==12140">细胞学筛查不适用于无性经验女性。如果是，请<br/><span class="bull" @click="tiaoguo">自愿跳过筛查</span></p>
   </div>
 </template>
@@ -32,7 +32,7 @@
     data() {
       return {
         imgsrc: img,
-        res: '',
+        res: 12143,
       };
     },
     created() {
