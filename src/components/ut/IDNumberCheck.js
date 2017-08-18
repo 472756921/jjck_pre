@@ -14,7 +14,7 @@ function IdentityCodeValid(code) {
     tip = '身份证号格式错误';
     pass = false;
   } else if (!city[code.substr(0, 2)]) {
-    tip = '地址编码错误';
+    tip = '身份证地址编码错误';
     pass = false;
   } else {
     // 18位身份证需要验证最后一位校验位
@@ -35,7 +35,7 @@ function IdentityCodeValid(code) {
     const A = parity[sum % 11];
     const B = Ncode[17];
     if (Number(A) !== Number(B)) {
-      tip = '校验位错误';
+      tip = '身份证校验位错误';
       pass = false;
     }
   }

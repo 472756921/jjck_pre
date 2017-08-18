@@ -66,6 +66,7 @@
           this.teamID = teams.teamID;
         } else {
           this.error('请选择团队');
+          return;
         }
         sessionStorage.removeItem('nweUser');
         if (this.userName === '' || this.numberID === '' || this.phone === '' || this.address === '') {
@@ -101,6 +102,7 @@
             const e = 'error';
             if (res.data === 1203) {
               this.success(mackINFO(e + res.data));
+              sessionStorage.clear();
             } else {
               this.error(mackINFO(e + res.data));
             }
