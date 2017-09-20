@@ -52,7 +52,6 @@
               this.success('您已跳过筛查检测，请等待接种安排');
             }
           }).catch((e) => {
-            console.log(e);
             this.error('服务器有点忙，请稍后再试');
           });
         }
@@ -66,7 +65,6 @@
         }).then((res) => {
             this.res = res.data;
         }).catch((e) => {
-          console.log(e);
           this.error('服务器有点忙，请稍后再试');
         });
       },
@@ -77,6 +75,7 @@
           dataType: 'JSON',
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
+          console.log(res);
           if (typeof window.WeixinJSBridge === 'undefined') {
             if (document.addEventListener) {
               document.addEventListener('window.WeixinJSBridgeReady',
@@ -90,7 +89,7 @@
               res.data.package, res.data.paySign, res.data.timeStamp);
           }
         }).catch((e) => {
-          console.log(e);
+          this.error(e);
           this.error('服务器有点忙，请稍后再试');
         });
       },
@@ -104,7 +103,7 @@
         window.WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
             'appId': appIdV,
-            'timeStamp': timeStampV.toString(),
+            'timeStamp': timeStampV,
             'nonceStr': nonceStrV,
             'package': 'prepay_id=' + prepayIdV,
             'signType': 'MD5',
@@ -114,7 +113,7 @@
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               location.reload();
             }
-          },
+          }
         );
       },
     },

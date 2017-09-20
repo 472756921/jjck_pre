@@ -64,12 +64,15 @@
         }).then((res) => {
           if (res.data === 1) {
             this.success('预约成功');
+            window.location.reload();
           }
           if (res.data === 1308) {
             this.error('您已经预约该服务，请勿重复预约');
+            window.location.reload();
           }
           if (res.data === 1311) {
             this.error('您尚未开始免疫服务或尚未确认付款信息，请处理后再试');
+            window.location.reload();
           }
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');
@@ -84,6 +87,7 @@
         }).then((res) => {
           if (res.data === 1) {
             this.success('已发出申请，系统确认后将通过短信通知');
+            window.location.reload();
           }
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');

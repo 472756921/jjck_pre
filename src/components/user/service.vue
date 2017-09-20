@@ -19,7 +19,7 @@
       <br/>
       <Button :type="status==2?'primary':''" class="center" @click="service('injection')">开始免疫服务</Button>
       <br/>
-      <Button :type="status==3?'primary':''" class="center" @click="service('vaccine')">疫苗</Button>
+      <Button :type="status==4?'primary':''" class="center" @click="service('vaccine')">疫苗</Button>
     </div>
 </template>
 

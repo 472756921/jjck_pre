@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>注射安排，第二针</h3>
+    <h3>注射安排，第三针</h3>
     <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
     <Modal
       v-model="modal"
