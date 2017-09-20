@@ -1,13 +1,5 @@
 <template>
-  <div class="block">
-    <el-pagination
-      layout="prev, pager, next"
-      @current-change="changPage"
-      :page-count = 'totalPage'
-      :current-page = 'pageNow'
-      :page-size = 50>
-    </el-pagination>
-  </div>
+  <Page :page-size ='50' size="small" :current="pageNow" @on-change="changPage" class="block"></Page>
 </template>
 
 <script type="text/ecmascript-6">

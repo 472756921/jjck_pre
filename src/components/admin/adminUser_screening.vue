@@ -19,16 +19,22 @@
         <Radio label="3">咨询医生</Radio>
       </Radio-group>
     </Modal>
+
+    <Page :page="page" v-if="over" v-on:pageChange="getData"/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import { screeningList, createScreening, updateScreeningDate, updateScreeningRes } from '../../interface';
+  import Page from './page';
 
   export default {
     name: 'adminUser_screening',
+    components: { Page },
     data() {
       return {
+        over: false,
+        page: '',
         userID: '',
         isUpdate: '',
         user: '',
@@ -67,19 +73,20 @@
       };
     },
     created() {
-      this.getData();
+      this.getData(1);
     },
     methods: {
-      getData() {
+      getData(page) {
         this.$ajax({
           method: 'post',
           url: screeningList(),
           dataType: 'JSON',
-          data: { page: 1, userName: '' },
+          data: { page: page, userName: '' },
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
-          console.log(res.data);
           this.data1 = res.data.users;
+          this.over = true;
+          this.page = { totalPage: res.data.totalPage, page:  res.data.page,  };
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');
         });
