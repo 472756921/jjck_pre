@@ -2,16 +2,21 @@
   <div>
     <h3>疫苗</h3>
     <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
+    <Page :page="page" v-if="over" v-on:pageChange="getData"/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import { adminvaccine, updateUserVaccineConfirmation } from '../../interface';
+  import Page from './page';
 
   export default {
     name: 'adminUser_vaccine',
+    components: { Page },
     data() {
       return {
+        over: false,
+        page: '',
         user: '',
         columns1: [
           {
@@ -36,19 +41,20 @@
       };
     },
     created() {
-      this.getData();
+      this.getData(1);
     },
     methods: {
-      getData() {
+      getData(page) {
         this.$ajax({
           method: 'post',
           url: adminvaccine(),
           dataType: 'JSON',
-          data: { page: 1, userName: '' },
+          data: { page: page, userName: '' },
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
-          console.log(res.data);
           this.data1 = res.data.users;
+          this.over = true;
+          this.page = { totalPage: res.data.totalPage, page:  res.data.page,  };
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');
         });

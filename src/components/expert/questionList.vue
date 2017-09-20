@@ -73,7 +73,6 @@
           const exID = this.doc.id;
           const t = '?expertID=';
           const par = t + exID;
-          console.log(this.doc);
           this.$ajax({
             method: 'get',
             url: expertGetQuestionList() + par,

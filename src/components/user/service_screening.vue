@@ -75,7 +75,6 @@
           dataType: 'JSON',
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
-          console.log(res);
           if (typeof window.WeixinJSBridge === 'undefined') {
             if (document.addEventListener) {
               document.addEventListener('window.WeixinJSBridgeReady',
