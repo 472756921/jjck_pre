@@ -26,15 +26,6 @@ module.exports = {
   },
   module: {
     rules: [
-      //{
-      //  test: /\.(js|vue)$/,
-      //  loader: 'eslint-loader',
-      //  enforce: 'pre',
-      //  include: [resolve('src'), resolve('test')],
-      //  options: {
-      //    formatter: require('eslint-friendly-formatter')
-      //  }
-      //},
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -65,7 +56,7 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 80000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
