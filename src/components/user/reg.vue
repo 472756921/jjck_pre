@@ -25,7 +25,7 @@
     </div>
     <br/>
     <div id="aaa" >
-      <Checkbox v-model="single" class="ttt"><a href="#/agreement">我已阅读并同意《重庆久佳健康协议》</a></Checkbox>
+      <Checkbox v-model="single" class="ttt"><a href="#/agreement">我已阅读并接受《重庆久佳健康协议》</a></Checkbox>
     </div>
     <br/>
     <div class="center warning">{{warning}}</div>

@@ -2,7 +2,7 @@
   <div>
     <br/>
     <Button-group>
-      <Button @click="getin(item, index)" :type="chooes==index?'primary':''" v-for="(item, index) in list">{{item.name}} ({{item.count}}人)</Button>
+      <Button @click="getin(item, index)" :type="chooes==index?'primary':' '" v-for="(item, index) in list">{{item.name}} ({{item.count}}人)</Button>
     </Button-group>
   </div>
 </template>

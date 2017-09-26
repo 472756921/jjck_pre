@@ -1,6 +1,7 @@
 <template>
   <Row>
-    <img src="http://iph.href.lu/100x100" class="center"/>
+    <img :src="img" class="center" width="200px"/>
+    <br/>
     <h2 class="center">管理员登录</h2>
     <br/>
     <Col :sm="24" :md="{ span: 6, offset: 9 }">
@@ -17,6 +18,7 @@
 
 <script type="text/ecmascript-6">
   import { adminLogin } from '../../interface';
+  import img from '../../assets/logo.jpg';
 
   export default {
     name: 'adminLogin',
@@ -24,6 +26,7 @@
       return {
         pwd: '',
         account: '',
+        img: img,
       };
     },
     methods: {
