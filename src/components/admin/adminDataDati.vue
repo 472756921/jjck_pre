@@ -23,6 +23,28 @@
             title: '销售数量',
             key: 'sales',
           },
+          {
+            title: '操作',
+            key: 'option',
+            render: (h, p) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.show(p.row.statisticsDate)
+                    }
+                  }
+                }, '详细'),
+              ]);
+            },
+          },
         ],
         data1: [],
       };
@@ -32,6 +54,9 @@
       this.sure(this.ids);
     },
     methods: {
+      show (date) {
+        this.$router.push({ name: 'adminDataDati2', params: { date: date, tid: this.ids } });
+      },
       sure(ids) {
         const par = '?ID=';
         this.$ajax({

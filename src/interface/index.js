@@ -48,6 +48,12 @@ export const getTeamTeamDate = function () {
   const API = Host + URL;
   return API;
 };
+// 获取团队列表详情
+export const getStatisticsDetail = function () {
+  const URL = '/public/getStatisticsDetail';
+  const API = Host + URL;
+  return API;
+};
 // 用户获取用户个人提问列表
 export const getUserQusetionList = function () {
   const URL = '/expert/getUserQusetionList';

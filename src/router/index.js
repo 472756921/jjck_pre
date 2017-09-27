@@ -34,6 +34,7 @@ import AdminNew from '@/components/admin/adminNew';
 import BankList from '@/components/admin/bankList';
 import BankNew from '@/components/admin/bankNew';
 import AdminDataDati from '@/components/admin/adminDataDati';
+import adminDataDati2 from '@/components/admin/adminDataDati2';
 
 Vue.use(Router);
 Vue.use(iView);
@@ -204,6 +205,11 @@ export default new Router({
           path: 'adminDataDati',
           name: 'adminDataDati',
           component: AdminDataDati,
+        },
+        {
+          path: 'adminDataDati2',
+          name: 'adminDataDati2',
+          component: adminDataDati2,
         },
       ],
     },
