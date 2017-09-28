@@ -4,6 +4,8 @@
     <Button-group>
       <Button @click="getin(item, index)" :type="chooes==index?'primary':' '" v-for="(item, index) in list">{{item.name}} ({{item.count}}人)</Button>
     </Button-group>
+    <br/>
+    <div v-if="chooes!='3'">简介 : {{ this.list[this.chooes].introduction }}</div>
   </div>
 </template>
 
