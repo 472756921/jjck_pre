@@ -2,6 +2,8 @@
   <div>
     <h3>银行账号管理</h3>
     汇率：<input  v-model='hl'> <button @click="updateRates">修改</button>
+    注射服务费：<input  v-model='zsf.service_price'> <button @click="updateRates2(0)">修改</button>
+    疫苗费：<input  v-model='ymf.service_price'> <button @click="updateRates2(1)">修改</button>
     <br/>
     <br/>
     <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
@@ -9,7 +11,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { bankList, updateBanksStatus, deleteBank, getRate, updateRate } from '../../interface';
+  import { bankList, updateBanksStatus, deleteBank, getRate, updateRate, getThePrices, updatePrice } from '../../interface';
 
   export default {
     name: 'bankList',
@@ -41,13 +43,29 @@
           },
         ],
         data1: [],
+        zsf: '',
+        ymf: '',
       };
     },
     created() {
       this.getData();
       this.gethl();
+      this.getfy();
     },
     methods: {
+      getfy(){
+        this.$ajax({
+          method: 'get',
+          url: getThePrices(),
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          this.zsf = res.data[0];
+          this.ymf = res.data[1];
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
       getData() {
         this.$ajax({
           method: 'get',
@@ -78,6 +96,28 @@
           url: updateRate(),
           dataType: 'JSON',
           data: { rate: this.hl },
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          if (res.data === 603) {
+            this.success('修改成功');
+          }
+        }).catch(() => {
+          this.error('服务器有点忙，请稍后再试');
+        });
+      },
+      updateRates2(type) {
+        let data;
+        if(type == 0) {
+          data = {id: 1, service_price: this.zsf.service_price}
+        }
+        if(type == 1) {
+          data = {id: 2, service_price: this.ymf.service_price}
+        }
+        this.$ajax({
+          method: 'post',
+          url: updatePrice(),
+          dataType: 'JSON',
+          data: data,
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
           if (res.data === 603) {

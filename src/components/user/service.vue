@@ -17,9 +17,9 @@
       <br/>
       <Button :type="status==1?'primary':''" class="center" @click="service('screening')">预约服务</Button>
       <br/>
-      <Button :type="status==2||3?'primary':''" class="center" @click="service('injection')">开始免疫服务</Button>
+      <Button :type="status==2||(status==3&&status2!=3)?'primary':''" class="center" @click="service('injection')">开始免疫服务</Button>
       <br/>
-      <Button :type="status==4?'primary':''" class="center" @click="service('vaccine')">疫苗</Button>
+      <Button :type="status==4||(status==3&&status2==3)?'primary':''" class="center" @click="service('vaccine')">疫苗</Button>
     </div>
 </template>
 
@@ -33,6 +33,7 @@
       return {
         imgsrc: img,
         status: 1,
+        status2: 1,
       };
     },
     created() {
@@ -50,6 +51,7 @@
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
           this.status = res.data[0];
+          this.status2 = res.data[1];
         }).catch((e) => {
           console.log(e);
           this.error('服务器有点忙，请稍后再试');

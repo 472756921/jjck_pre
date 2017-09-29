@@ -273,6 +273,16 @@ export const bankList = function () {
   const API = Host + URL;
   return API;
 };
+export const updatePrice = function () {
+  const URL = '/public/updatePrice';
+  const API = Host + URL;
+  return API;
+};
+export const getThePrices = function () {
+  const URL = '/public/getThePrices';
+  const API = Host + URL;
+  return API;
+};
 export const getRate = function () {
   const URL = '/public/getRate';
   const API = Host + URL;

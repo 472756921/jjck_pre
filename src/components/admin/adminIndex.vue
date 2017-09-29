@@ -46,7 +46,7 @@
               <Icon type="document-text"></Icon>
               银行账号
             </template>
-            <Menu-item name="bankList">账号列表</Menu-item>
+            <Menu-item name="bankList">账号费用管理</Menu-item>
             <Menu-item name="bankNew">新增账号</Menu-item>
           </Submenu>
         </Menu>

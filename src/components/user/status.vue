@@ -23,6 +23,7 @@
           <div>暂无结果</div>
           <div>耐心等待</div>
         </div>
+        <div>{{ scdata }}</div>
       </div>
     </Tab-pane>
     <Tab-pane label="流程进度">
@@ -65,6 +66,7 @@
         thr: '尚未安排时间',
         list: '',
         info: '',
+        scdata: '暂无信息',
       };
     },
     created() {

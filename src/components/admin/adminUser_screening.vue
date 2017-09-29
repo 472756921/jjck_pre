@@ -13,11 +13,14 @@
       v-model="modal2"
       title="录入结果"
       @on-ok="asyncOK2">
-      <Radio-group v-model="screeningRes">
+      <Radio-group v-model="screeningRes" @on-change="changedata">
         <Radio label="1">可以接种</Radio>
         <Radio label="2">不能接种</Radio>
         <Radio label="3">咨询医生</Radio>
       </Radio-group>
+      <br/>
+      <br/>
+      <Input v-model="jcjg" :placeholder='textN' style="width: 300px"></Input>
     </Modal>
 
     <Page :page="page" v-if="over" v-on:pageChange="getData"/>
@@ -33,6 +36,8 @@
     components: { Page },
     data() {
       return {
+        textN: '结果为阴性，请选择下一步服务',
+        jcjg: '',
         over: false,
         page: '',
         userID: '',
@@ -76,6 +81,17 @@
       this.getData(1);
     },
     methods: {
+      changedata() {
+        if (this.screeningRes == 1) {
+          this.textN = '结果为阴性，请选择下一步服务';
+        }
+        if (this.screeningRes == 2) {
+          this.textN = '结果为阳性，不能接种，请咨询专家详细治疗方案';
+        } if (this.screeningRes == 3) {
+          this.textN = '请咨询医生后根据建议进行后续操作';
+        }
+
+      },
       getData(page) {
         this.$ajax({
           method: 'post',
@@ -149,11 +165,14 @@
         this.modal2 = true;
       },
       asyncOK2() {
+        if(this.jcjg == '') {
+          this.jcjg = this.textN;
+        }
         this.$ajax({
           method: 'post',
           url: updateScreeningRes(),
           dataType: 'JSON',
-          data: { screeningRes: this.screeningRes, userID: this.userID },
+          data: { screeningRes: this.screeningRes, userID: this.userID, jcjg: this.jcjg },
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
           if (res.data === 603) {
