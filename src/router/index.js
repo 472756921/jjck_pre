@@ -21,6 +21,7 @@ import QuestionList from '@/components/expert/questionList';
 import AdminLogin from '@/components/admin/adminLogin';
 import AdminIndex from '@/components/admin/adminIndex';
 import AdminData from '@/components/admin/adminData';
+import adminUser from '@/components/admin/adminUser';
 import AdminUserScreening from '@/components/admin/adminUser_screening';
 import AdminUserInjection from '@/components/admin/adminUser_injection';
 import AdminUserVaccine from '@/components/admin/adminUser_vaccine';
@@ -42,7 +43,7 @@ Vue.use(iView);
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/none',
       name: 'Hello',
       component: Hello,
     },
@@ -142,6 +143,11 @@ export default new Router({
           path: 'adminData',
           name: 'adminData',
           component: AdminData,
+        },
+        {
+          path: 'adminUser',
+          name: 'adminUser',
+          component: adminUser,
         },
         {
           path: 'adminUser_screening',

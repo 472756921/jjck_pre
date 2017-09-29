@@ -25,7 +25,7 @@
     </div>
     <br/>
     <div id="aaa" >
-      <Checkbox v-model="single" class="ttt"><a href="#/agreement">我已阅读并接受《重庆久佳健康协议》</a></Checkbox>
+      <Checkbox v-model="single" class="ttt"><span @click='goage'>我已阅读并接受《重庆久佳健康协议》</span></Checkbox>
     </div>
     <br/>
     <div class="center warning">{{warning}}</div>
@@ -59,6 +59,18 @@
       };
     },
     methods: {
+      goage() {
+        sessionStorage.setItem('nweUser',JSON.stringify(
+          {
+            userName: this.userName,
+            numberID: this.numberID,
+            phone: this.phone,
+            address: this.address,
+            teamID: this.teamID,
+          }
+        ));
+        this.$router.push({name:'agreement'});
+      },
       reg() {
         const team = sessionStorage.getItem('UCTID');
         if (team !== '' && team !== null) {

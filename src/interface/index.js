@@ -243,6 +243,12 @@ export const newTeam = function () {
   return API;
 };
 
+export const getUserStatus = function () {
+  const URL = '/public/getUserStatus';
+  const API = Host + URL;
+  return API;
+};
+
 export const adminList = function () {
   const URL = '/public/getAdmins';
   const API = Host + URL;

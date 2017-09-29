@@ -18,6 +18,7 @@
               <Icon type="person"></Icon>
               用户
             </template>
+            <Menu-item name="adminUser">用户管理</Menu-item>
             <Menu-item name="adminUser_screening">筛查</Menu-item>
             <Menu-item name="adminUser_injection">注射</Menu-item>
             <Menu-item name="adminUser_vaccine">疫苗</Menu-item>

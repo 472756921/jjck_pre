@@ -1,5 +1,23 @@
 <template>
   <Tabs type="card">
+    <Tab-pane label="流程进度">
+      <div class="warning">
+        特别提醒：前往医院时检查和注射时，请携带个人身份证
+        <br/>
+        如有问题，请联系客服处理
+      </div>
+      <br/>
+      <Steps :current='this.list' direction="vertical" :status="this.jzs">
+        <Step title="筛查" :content='this.screeningtext'></Step>
+        <Step title="完成筛查" :content='this.screeningRes'></Step>
+        <Step title="注射服务" :content='this.injection'></Step>
+        <Step title="购买疫苗" :content='this.vaccine'></Step>
+        <Step title="注射第一针" :content="this.fist"></Step>
+        <Step title="注射第二针" :content="this.sec"></Step>
+        <Step title="注射第三针" :content="this.thr"></Step>
+        <Step title="完成注射"></Step>
+      </Steps>
+    </Tab-pane>
     <Tab-pane label="筛查结果">
       <div class="content">
         <h3 class="center">您的筛查结果</h3>
@@ -23,27 +41,8 @@
           <div>暂无结果</div>
           <div>耐心等待</div>
         </div>
-        <div>{{ scdata }}</div>
+        <div>{{ this.screening.jcjq }}</div>
       </div>
-    </Tab-pane>
-    <Tab-pane label="流程进度">
-      <div class="warning">
-        特别提醒：前往医院时检查和注射时，请携带个人身份证
-        <br/>
-        如有问题，请联系客服处理
-      </div>
-      <br/>
-      <Steps :current='this.list' direction="vertical" :status="this.jzs">
-        <Step title="筛查" :content='this.screeningtext'></Step>
-        <Step title="完成筛查" :content='this.screeningRes'></Step>
-        <Step title="注射服务" :content='this.injection'></Step>
-        <Step title="购买疫苗" :content='this.vaccine'></Step>
-        <Step title="注射第一针" :content="this.fist"></Step>
-        <Step title="注射第二针" :content="this.sec"></Step>
-        <Step title="注射第三针" :content="this.thr"></Step>
-        <Step title="完成注射"></Step>
-      </Steps>
-
     </Tab-pane>
   </Tabs>
 </template>

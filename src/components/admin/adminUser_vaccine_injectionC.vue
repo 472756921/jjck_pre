@@ -80,7 +80,11 @@
                     },
                     on: {
                       click: () => {
-                        this.over(b.row.id);
+                        if(b.row.vaccinateDate != null){
+                          this.over(b.row.id);
+                        } else {
+                          this.$Message.warning('还未设置筛查时间');
+                        }
                       },
                     },
                   }, '完成注射'),

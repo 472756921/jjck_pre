@@ -22,7 +22,6 @@
       <br/>
       <Input v-model="jcjg" :placeholder='textN' style="width: 300px"></Input>
     </Modal>
-
     <Page :page="page" v-if="over" v-on:pageChange="getData"/>
   </div>
 </template>
@@ -82,12 +81,12 @@
     },
     methods: {
       changedata() {
-        if (this.screeningRes == 1) {
+        if (this.screeningRes == '1') {
           this.textN = '结果为阴性，请选择下一步服务';
         }
-        if (this.screeningRes == 2) {
+        if (this.screeningRes == '2') {
           this.textN = '结果为阳性，不能接种，请咨询专家详细治疗方案';
-        } if (this.screeningRes == 3) {
+        } if (this.screeningRes == '3') {
           this.textN = '请咨询医生后根据建议进行后续操作';
         }
 
@@ -127,7 +126,11 @@
             },
             on: {
               click: () => {
-                this.scres(params.row.id, params.index);
+                if(params.row.screeningDate != null || params.row.screeningDate == ''){
+                  this.scres(params.row.id, params.index);
+                } else {
+                  this.$Message.warning('还未设置筛查时间');
+                }
               },
             },
           }, '录入结果'),
@@ -172,14 +175,14 @@
           method: 'post',
           url: updateScreeningRes(),
           dataType: 'JSON',
-          data: { screeningRes: this.screeningRes, userID: this.userID, jcjg: this.jcjg },
+          data: { screeningRes: this.screeningRes, userID: this.userID, jcjq: this.jcjg },
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
           if (res.data === 603) {
             location.reload();
           }
         }).catch(() => {
-          this.error('服务器有点忙，请稍后再试');
+          this.$message.error('服务器有点忙，请稍后再试');
         });
       },
     },
