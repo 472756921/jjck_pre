@@ -15,9 +15,9 @@
           <div>待定</div>
           <div>请咨询专家</div>
         </div>
-        <div class="ra gra" v-if="this.screening.screeningRes == 4">
-          <div>跳过筛查</div>
-          <div>请预约服务</div>
+        <div class="ra gre" v-if="this.screening.screeningRes == 4">
+          <div>自愿跳过</div>
+          <div>筛查服务</div>
         </div>
         <div class="ra gra" v-if="this.screening == ''">
           <div>暂无结果</div>
@@ -92,6 +92,8 @@
             }
           } else if (data === 3) {
             this.screeningRes = '请根据专家建议选择接种';
+          } else if (data === 4) {
+            this.screeningRes = '自愿跳过筛查';
           }
         }
 

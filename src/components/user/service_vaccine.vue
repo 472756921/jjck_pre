@@ -87,7 +87,7 @@
         }).then((res) => {
           if (res.data === 1) {
             this.success('已发出申请，系统确认后将通过短信通知');
-            setTimeout(()=>{this.$router.push({ name: 'service' });},1500);
+            setTimeout(()=>{this.$router.push({ name: 'service' });},2000);
           }
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');

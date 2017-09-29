@@ -48,8 +48,9 @@
             dataType: 'JSON',
             contentType: 'application/json;charset=UTF-8',
           }).then((res) => {
-            if (res.data === 1) {
+            if (res.data === 0) {
               this.success('您已跳过筛查检测，请等待接种安排');
+              setTimeout(()=>{this.$router.push({ name: 'service' });},2000);
             }
           }).catch((e) => {
             this.error('服务器有点忙，请稍后再试');
@@ -87,7 +88,6 @@
             this.onBridgeReady(res.data.appId, res.data.nonceStr,
               res.data.package, res.data.paySign, res.data.timeStamp);
           }
-          setTimeout(()=>{this.$router.push({ name: 'service' });},1500);
         }).catch((e) => {
           this.error(e);
           this.error('服务器有点忙，请稍后再试');
