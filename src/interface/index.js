@@ -2,7 +2,7 @@
  * Created by Benson on 2017/8/7.
  */
 
-  const Host = 'http://www.bensonchen.cn/jjck';
+  const Host = 'http://www.9jck.com/jjck';
  //const Host = 'http://localhost:8080';
 
 // 用户注册
