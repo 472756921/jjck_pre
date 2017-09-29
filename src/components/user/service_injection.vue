@@ -65,7 +65,7 @@
         }).then((res) => {
           if (res.data === 1) {
             this.success('预约成功,已通过短信将付款方式发送至您的手机，请注意查收');
-            window.location.reload();
+            setTimeout(function(){this.$router.push({ name: 'service' });},1500);
           }
           if (res.data === 1308) {
             this.error('您已经预约该服务，请勿重复预约');

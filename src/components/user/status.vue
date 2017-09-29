@@ -15,6 +15,10 @@
           <div>待定</div>
           <div>请咨询专家</div>
         </div>
+        <div class="ra gra" v-if="this.screening.screeningRes == 4">
+          <div>跳过筛查</div>
+          <div>请预约服务</div>
+        </div>
         <div class="ra gra" v-if="this.screening == ''">
           <div>暂无结果</div>
           <div>耐心等待</div>

@@ -1,7 +1,10 @@
 <template>
   <div>
     <div id="main" class="am-u-sm-12 am-margin-top-sm" style="height:400px">
-      <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
+      <Button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出数据</Button>
+      <br/>
+      <br/>
+      <Table :columns="columns1" :data="data1" on-row-click="clickList" ref="table"></Table>
     </div>
   </div>
 </template>
@@ -53,6 +56,13 @@
       this.sure(date, tid);
     },
     methods: {
+      exportData (type) {
+        if (type === 1) {
+          this.$refs.table.exportCsv({
+            filename: this.$route.params.date,
+          });
+        }
+      },
       sure(date, tid) {
         const par = '?ID='+tid+"&date="+date;
         this.$ajax({

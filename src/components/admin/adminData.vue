@@ -19,6 +19,10 @@
             key: 'name',
           },
           {
+            title: '累计销售',
+            key: 'num',
+          },
+          {
             title: '操作',
             key: 'action',
             render: this.get,
