@@ -20,7 +20,7 @@
       </Radio-group>
       <br/>
       <br/>
-      <Input v-model="jcjg" :placeholder='textN' style="width: 300px"></Input>
+      <Input v-model="jcjg" :placeholder='textN' style="width: 300px"/>
     </Modal>
     <Page :page="page" v-if="over" v-on:pageChange="getData"/>
   </div>

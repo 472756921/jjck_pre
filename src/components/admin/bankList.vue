@@ -2,7 +2,7 @@
   <div>
     <h3>银行账号管理</h3>
     汇率：<input  v-model='hl'> <button @click="updateRates">修改</button>
-    注射服务费：<input  v-model='zsf.service_price'> <button @click="updateRates2(0)">修改</button>
+    免疫服务费：<input  v-model='zsf.service_price'> <button @click="updateRates2(0)">修改</button>
     疫苗费：<input  v-model='ymf.service_price'> <button @click="updateRates2(1)">修改</button>
     <br/>
     <br/>

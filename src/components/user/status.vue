@@ -10,12 +10,12 @@
       <Steps :current='this.list' direction="vertical" :status="this.jzs">
         <Step title="筛查" :content='this.screeningtext'></Step>
         <Step title="完成筛查" :content='this.screeningRes'></Step>
-        <Step title="注射服务" :content='this.injection'></Step>
+        <Step title="免疫服务" :content='this.injection'></Step>
         <Step title="购买疫苗" :content='this.vaccine'></Step>
-        <Step title="注射第一针" :content="this.fist"></Step>
-        <Step title="注射第二针" :content="this.sec"></Step>
-        <Step title="注射第三针" :content="this.thr"></Step>
-        <Step title="完成注射"></Step>
+        <Step title="免疫第一次" :content="this.fist"></Step>
+        <Step title="免疫第二次" :content="this.sec"></Step>
+        <Step title="免疫第三次" :content="this.thr"></Step>
+        <Step title="完成免疫"></Step>
       </Steps>
     </Tab-pane>
     <Tab-pane label="筛查结果">
@@ -108,14 +108,14 @@
           } else if (data === 2) {
             this.injection = '付款信息确认中';
           } else if (data === 3) {
-            this.injection = '已预约注射服务';
+            this.injection = '已预约免疫服务';
           }
         }
 
         if (dd === 4) {
           this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
           this.screeningRes = '可以接种';
-          this.injection = '已预约注射服务';
+          this.injection = '已预约免疫服务';
           if (data === 0) {
             this.vaccine = '您尚未购买疫苗';
           } else if (data === 1) {
@@ -123,43 +123,43 @@
           } else if (data === 2) {
             this.vaccine = '付款信息确认中';
           } else if (data === 3) {
-            this.vaccine = '已购买疫苗，请等待安排注射时间';
+            this.vaccine = '已购买疫苗，请等待安排免疫时间';
           }
         }
 
         if (dd === 5) {
           this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
           this.screeningRes = '可以接种';
-          this.injection = '已预约注射服务';
-          this.vaccine = '已购买疫苗，请等待安排注射时间';
+          this.injection = '已预约免疫服务';
+          this.vaccine = '已购买疫苗，请等待安排免疫时间';
           if (data === 1) {
-            this.fist = '已安排第一针注射时间，请按照短信前往注射';
+            this.fist = '已安排第一次免疫时间，请按照短信前往免疫';
             if (ddd === 1) {
-              this.fist = '第一针已注射';
+              this.fist = '第一次已免疫';
             }
           } else if (data === 2) {
-            this.fist = '第一针已注射';
-            this.sec = '已安排第二针注射时间，请按照短信前往注射';
+            this.fist = '第一次已免疫';
+            this.sec = '已安排第二次免疫时间，请按照短信前往免疫';
             if (ddd === 1) {
-              this.sec = '第二针已注射';
+              this.sec = '第二次已免疫';
             }
           } else if (data === 3) {
-            this.fist = '第一针已注射';
-            this.sec = '第二针已注射';
-            this.thr = '已安排第三针注射时间，请按照短信前往注射';
+            this.fist = '第一次已免疫';
+            this.sec = '第二次已免疫';
+            this.thr = '已安排第三次免疫时间，请按照短信前往免疫';
             if (ddd === 1) {
-              this.thr = '第三针已注射';
+              this.thr = '第三次已免疫';
             }
           }
         }
         if (dd === 6) {
           this.screeningtext = '你已预约该服务，请按照短信前往医院进行筛查';
           this.screeningRes = '可以接种';
-          this.injection = '已预约注射服务';
-          this.vaccine = '已购买疫苗，请等待安排注射时间';
-          this.fist = '第一针已注射';
-          this.sec = '第二针已注射';
-          this.thr = '第三针已注射';
+          this.injection = '已预约免疫服务';
+          this.vaccine = '已购买疫苗，请等待安排免疫时间';
+          this.fist = '第一次已免疫';
+          this.sec = '第二次已免疫';
+          this.thr = '第三次已免疫';
         }
       },
       getScreening() {
