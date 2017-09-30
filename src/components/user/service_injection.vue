@@ -6,7 +6,7 @@
     <div>
       <h3>服务内容介绍</h3>
       <P>
-        该服务为您提供正规医疗机构HVP疫苗注射服务，时间流程安排，并且免费为您提供疫苗购买渠道，以便您能够顺利的购买疫苗。
+        该服务为您提供正规医疗机构HVP疫苗免疫服务，时间流程安排，并且免费为您提供疫苗购买渠道，以便您能够顺利的购买疫苗。
       </P>
     </div>
     <br/>
@@ -18,7 +18,7 @@
     <br/>
     <div class="success" v-if="this.screeningStatus.status == 3">您的付款信息已经确认，请前往购买疫苗<br/>疫苗购买后我们将尽快为您安排接种时间</div>
     <br/>
-    <Button type="primary" class="center" @click="injection" v-if="this.screeningStatus == ''">确认预约注射服务</Button>
+    <Button type="primary" class="center" @click="injection" v-if="this.screeningStatus == ''">确认预约免疫服务</Button>
     <Button type="primary" class="center" @click="injectionGO" v-if="this.screeningStatus.status == 1">已付款，申请确认</Button>
     <Button type="primary" class="center" @click="injectionGO" v-if="this.screeningStatus.status == 2">提醒确认收款</Button>
     <Button type="primary" class="center" @click="ym" v-if="this.screeningStatus.status == 3">获取疫苗</Button>
@@ -71,10 +71,10 @@
             this.error('您已经预约该服务，请勿重复预约');
           }
           if (res.data === 1309) {
-            this.error('您还未收到筛查结果，不能预约注射服务');
+            this.error('您还未收到筛查结果，不能预约免疫服务');
           }
           if (res.data === 1310) {
-            this.error('您的筛查结果为阳性，不能预约注射服务，请咨询专家了解后续治疗方案');
+            this.error('您的筛查结果为阳性，不能预约免疫服务，请咨询专家了解后续治疗方案');
           }
         }).catch(() => {
           this.error('服务器有点忙，请稍后再试');
