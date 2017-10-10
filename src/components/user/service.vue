@@ -15,11 +15,11 @@
       <br/>
       <br/>
       <br/>
-      <Button :type="status==1?'primary':''" class="center" @click="service('screening')">预约服务</Button>
+      <Button :type="status==1?'primary':''" class="center" @click="service('screening')">预约检查</Button>
       <br/>
-      <Button :type="status==2||(status==3&&status2!=3)?'primary':''" class="center" @click="service('injection')">开始免疫服务</Button>
+      <Button :type="status==2||(status==3&&status2!=3)?'primary':''" class="center" @click="service('injection')">开始服务</Button>
       <br/>
-      <Button :type="status==4||(status==3&&status2==3)?'primary':''" class="center" @click="service('vaccine')">疫苗</Button>
+      <Button :type="status==4||(status==3&&status2==3)?'primary':''" class="center" @click="service('vaccine')">获取信息</Button>
     </div>
 </template>
 
