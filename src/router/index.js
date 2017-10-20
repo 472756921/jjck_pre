@@ -18,6 +18,7 @@ import QuestionNew from '@/components/expert/question';
 import UserQuestionList from '@/components/expert/userQuestionList';
 import Login from '@/components/expert/login';
 import QuestionList from '@/components/expert/questionList';
+import Jyjc from '@/components/jyjc/jyjc';
 import AdminLogin from '@/components/admin/adminLogin';
 import AdminIndex from '@/components/admin/adminIndex';
 import AdminData from '@/components/admin/adminData';
@@ -66,6 +67,11 @@ export default new Router({
       path: '/service',
       name: 'service',
       component: Service,
+    },
+    {
+      path: '/jyjc',
+      name: 'jyjc',
+      component: Jyjc,
     },
     {
       path: '/screening',

@@ -6,6 +6,7 @@
       <Radio label="2">已筛查未预约注射用户</Radio>
       <Radio label="3">已未预约注射未购买疫苗用户</Radio>
       <Radio label="6">完成用户</Radio>
+      <Radio label="7">已预约普媚研2基因检测用户</Radio>
     </RadioGroup>
     <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
     <Page :page="page" v-if="over" v-on:pageChange="getData"/>

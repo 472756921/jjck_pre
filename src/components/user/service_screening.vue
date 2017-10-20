@@ -103,7 +103,7 @@
         window.WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
             'appId': appIdV,
-            'timeStamp': timeStampV,
+            'timeStamp': timeStampV.toString(),
             'nonceStr': nonceStrV,
             'package': 'prepay_id=' + prepayIdV,
             'signType': 'MD5',
