@@ -8,13 +8,19 @@
       <Radio label="6">完成用户</Radio>
       <Radio label="7">已预约普媚研2基因检测用户</Radio>
     </RadioGroup>
-    <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
-    <Page :page="page" v-if="over" v-on:pageChange="getData"/>
+    <div v-if="disabledGroup == 7">
+      <Table :columns="columns2" :data="data1" on-row-click="clickList"></Table>
+      <Page :page="page" v-if="over" v-on:pageChange="getData2"/>
+    </div>
+    <div v-else>
+      <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
+      <Page :page="page" v-if="over" v-on:pageChange="getData"/>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { getUserStatus, updateUserVaccineConfirmation } from '../../interface';
+  import { getUserStatus, updateUserVaccineConfirmation, getGoodsOrders} from '../../interface';
   import Page from './page';
 
   export default {
@@ -44,6 +50,24 @@
             key: 'status',
           },
         ],
+        columns2: [
+          {
+            title: '姓名',
+            key: 'userName',
+          },
+          {
+            title: '身份证号码',
+            key: 'idNumber',
+          },
+          {
+            title: '电话号码',
+            key: 'phoneNumber',
+          },
+          {
+            title: '购买时间',
+            key: 'payDate',
+          },
+        ],
         data1: [],
       };
     },
@@ -52,7 +76,26 @@
     },
     methods: {
       changetype() {
-        this.getData(1);
+//        alert('disabledGroup'+this.disabledGroup);
+        if( this.disabledGroup == 7 ){
+          this.getData2(1);
+        } else{
+          this.getData(1);
+        }
+      },
+      getData2(page){
+        this.$ajax({
+          mathod: 'get',
+          url: getGoodsOrders() + '?page=' + page + '&status=1',
+          dataType: 'JSON',
+          contentType: 'application/json;charset=UTF-8',
+        }).then((res) => {
+          this.data1 = res.data.users;
+          this.over = true;
+          this.page = { totalPage: res.data.totalPage, page:  res.data.page,  };
+        }).catch((e) => {
+          this.error('服务器有点忙，请稍后再试');
+        });
       },
       getData(page) {
         this.$ajax({

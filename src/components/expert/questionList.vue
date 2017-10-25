@@ -13,7 +13,7 @@
       <Table :columns="columns1" :data="data1" on-row-click="clickList"></Table>
       <br/>
       <div class="center">
-        <Page class="center" :current="1" :total="22" simple></Page>
+        <Page class="center" :page-size="20" :current="pageNow" :page-count="totlePage" simple></Page>
       </div>
     </Col>
   </Row>
@@ -30,10 +30,12 @@
         this.error('用户未登录');
       }
       this.doc = JSON.parse(doc);
-      this.getData();
+      this.getData(1);
     },
     data() {
       return {
+        pageNow: '',
+        totlePage: '',
         doc: '',
         monthNum: '',
         monthNumAn: '',
@@ -66,24 +68,26 @@
         sessionStorage.setItem('qustion', JSON.stringify(this.data1[index]));
         this.$router.push({ name: 'questionNew', params: { r: 'd', questisonID: data } });
       },
-      getData() {
+      getData(page) {
         if (this.account === '' || this.pwd === '') {
           this.error('请输入账号和密码');
         } else {
           const exID = this.doc.id;
           const t = '?expertID=';
-          const par = t + exID;
+          const par = t + exID + '&page='+page;
           this.$ajax({
             method: 'get',
             url: expertGetQuestionList() + par,
             dataType: 'JSON',
             contentType: 'application/json;charset=UTF-8',
           }).then((res) => {
-            this.data1 = res.data.question;
-            this.monthNum = res.data.monthNum + res.data.monthNumAn;
-            this.monthNumAn = res.data.monthNumAn;
-            this.totleNum = res.data.totleNum + res.data.totleNumAn;
-            this.totleNumAn = res.data.totleNumAn;
+            this.data1 = res.data.healthDatas;
+            this.monthNum = res.data.num.monthNum + res.data.num.monthNumAn;
+            this.monthNumAn = res.data.num.monthNumAn;
+            this.totleNum = res.data.num.totleNum + res.data.num.totleNumAn;
+            this.totleNumAn = res.data.num.totleNumAn;
+            this.pageNow = res.data.page;
+            this.totlePage = res.data.totalPage * 20;
           }).catch((error) => {
             console.log(error);
           });

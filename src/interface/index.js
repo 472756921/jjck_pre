@@ -2,8 +2,9 @@
  * Created by Benson on 2017/8/7.
  */
 
-  const Host = 'http://www.9jck.com/jjck';
- //const Host = 'http://localhost:8080';
+const Host = 'http://www.9jck.com/jjck';
+//const Host = 'http://localhost:8080';
+
 
 // 用户注册
 export const userReg = function () {
@@ -311,6 +312,27 @@ export const deleteBank = function () {
 };
 export const saveBank = function () {
   const URL = '/public/saveBank';
+  const API = Host + URL;
+  return API;
+};
+
+//获取疫苗商品
+export const getGoods = function () {
+  const URL = '/payGoods/getGoods';
+  const API = Host + URL;
+  return API;
+};
+
+//购买基因检测
+export const buyGoods = function () {
+  const URL = '/user/buyGoods';
+  const API = Host + URL;
+  return API;
+};
+
+//管理员查看购买基因检测订单
+export const getGoodsOrders = function () {
+  const URL = '/payGoods/getGoodsOrders';
   const API = Host + URL;
   return API;
 };
