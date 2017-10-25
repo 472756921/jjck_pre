@@ -38,13 +38,13 @@
             method: 'post',
             url: expertLogin(),
             dataType: 'JSON',
-            data: { account: this.account, pwd: this.account },
+            data: { account: this.account, pwd: this.pwd },
             contentType: 'application/json;charset=UTF-8',
           }).then((res) => {
             if (res.data === '') {
               this.error('账号或密码错误');
             } else {
-              sessionStorage.setItem('doc', JSON.stringify(res.data));
+              sessionStorage.setItem('doc', JSON.stringify(res.data.expert));
               this.$router.push({ name: 'questionList' });
             }
           }).catch((error) => {

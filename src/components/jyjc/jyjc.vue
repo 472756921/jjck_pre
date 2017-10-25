@@ -47,9 +47,8 @@
       },
       yuy() {
         this.$ajax({
-          method: 'post',
-          url: buyGoods(),
-          data: { goods_id: 1 },
+          method: 'get',
+          url: buyGoods()+"?goods_id=1",
           dataType: 'JSON',
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
