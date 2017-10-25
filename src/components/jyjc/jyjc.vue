@@ -1,17 +1,18 @@
 <template>
   <div>
     <div class="content">
-      <img src="../../assets/banner.png" width="100%" class="am-img-responsive">
+      <img src="../../assets/jyjc.jpg" width="100%" class="am-img-responsive">
       <p class="am-text-sm am-padding-horizontal">BRCA1/2是两种具有抑制恶性肿瘤发生的基因，在调节人体细胞的复制、遗传物质DNA损伤修复、细胞的正常生长方面有重要作用。拥有这个基因突变的家族倾向于具有高乳腺癌发生率。</p>
       <br/>
       <p class="am-text-sm am-padding-horizontal">
         <span style="font-size: 1rem; line-height: 2rem;">费用</span>
         <br/>
-        预约普媚研2基因检测 ： ￥4800.00<br/>
+        预约普媚研2基因检测 ： <span class="re">¥4888.00</span><br/>
       </p>
     </div>
     <br/>
     <Button type="success" @click="yuy" long>预约普媚研2基因检测</Button>
+
 
   </div>
 </template>
@@ -56,10 +57,9 @@
           if( this.res == '401' ){
             this.error('用户不存在！');
           }else if( this.res == '1'){
-            this.success('预约成功！');
+            this.success('预约成功！稍后客服会主动联系您');
           }
         }).catch((e) => {
-//          this.error(e);
           this.error('服务器有点忙，请稍后再试');
         });
       },
@@ -74,4 +74,11 @@
 </script>
 
 <style scoped>
+  #app{
+    padding: 0!important;
+  }
+  .re{
+    color: red;
+    font-size: 1rem;
+  }
 </style>
