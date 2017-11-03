@@ -3,12 +3,11 @@
     <div>标题：{{data.titlte}}</div>
     <div>时间：{{data.createDate}}</div>
     <span>描述：</span>
-    <br/>
-    <br/>
+    <p class="bK">{{data.question}}</p>
     <br/>
     <div>回复时间：{{data.answerDate}}</div>
     <span>回复类容：</span>
-    <pre class="bK">{{data.answer}}</pre>
+    <p class="bK">{{data.answer}}</p>
   </div>
 </template>
 
