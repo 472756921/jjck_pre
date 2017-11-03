@@ -24,6 +24,8 @@ import Jyjc from '@/components/jyjc/jyjc';
 
 import AdminLogin from '@/components/admin/adminLogin';
 import AdminIndex from '@/components/admin/adminIndex';
+import questionList from '@/components/admin/questionList';
+import questionDa from '@/components/admin/question';
 import AdminData from '@/components/admin/adminData';
 import adminUser from '@/components/admin/adminUser';
 import AdminUserScreening from '@/components/admin/adminUser_screening';
@@ -148,6 +150,16 @@ export default new Router({
       name: 'adminIndex',
       component: AdminIndex,
       children: [
+        {
+          path: 'questionList',
+          name: 'questionList',
+          component: questionList,
+        },
+        {
+          path: 'questionDa/:id',
+          name: 'questionDa',
+          component: questionDa,
+        },
         {
           path: 'adminData',
           name: 'adminData',

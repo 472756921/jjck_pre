@@ -12,6 +12,7 @@
               数据
             </template>
             <Menu-item name="adminData">总体数据</Menu-item>
+            <Menu-item name="questionList">用户问答</Menu-item>
           </Submenu>
           <Submenu name="2">
             <template slot="title">
