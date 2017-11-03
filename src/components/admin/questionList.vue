@@ -7,7 +7,7 @@
 
 <script type="text/ecmascript-6">
   import Page from './page';
-
+  import { getQuestions } from '../../interface';
   export default {
     name: 'questionList',
     components: { Page },
@@ -25,12 +25,24 @@
             key: 'doctorName',
           },
           {
+            title: '标题',
+            key: 'title',
+          },
+          {
             title: '时间',
-            key: 'create_date',
+            key: 'createDate',
           },
           {
             title: '状态',
-            key: 'status',
+            key: 'over',
+            render: (h, p) => {
+              if(p.row.over==1){
+                return '已回复'
+              }
+              if(p.row.over==0){
+                return '未回复'
+              }
+            },
           },
           {
             title: '操作',
@@ -64,12 +76,11 @@
       getData(page) {
         this.$ajax({
           method: 'get',
-          url: getUserStatus() + '?page='+ page + '&type='+this.disabledGroup,
+          url: getQuestions() + '?page='+ page,
           dataType: 'JSON',
-          data: { page: page, userName: '' },
           contentType: 'application/json;charset=UTF-8',
         }).then((res) => {
-          this.data1 = res.data.users;
+          this.data1 = res.data.questions;
           this.over = true;
           this.page = { totalPage: res.data.totalPage, page:  res.data.page,  };
         }).catch(() => {

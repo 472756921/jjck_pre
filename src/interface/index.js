@@ -336,3 +336,14 @@ export const getGoodsOrders = function () {
   const API = Host + URL;
   return API;
 };
+
+export const getQuestions = function () {
+  const URL = '/public/getQuestions';
+  const API = Host + URL;
+  return API;
+};
+export const getQuestionsDetail = function () {
+  const URL = '/public/getQuestionsDetail';
+  const API = Host + URL;
+  return API;
+};
