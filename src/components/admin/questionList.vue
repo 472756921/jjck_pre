@@ -88,7 +88,7 @@
         });
       },
       datiel(id) {
-        this.$router.push({ path: 'questionDa/'+id});
+        this.$router.push({ name: 'questionDa',  params: { id: id }});
       },
     },
   };

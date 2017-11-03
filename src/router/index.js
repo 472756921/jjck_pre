@@ -156,7 +156,7 @@ export default new Router({
           component: questionList,
         },
         {
-          path: 'questionDa/:id',
+          path: 'questionDa',
           name: 'questionDa',
           component: questionDa,
         },
